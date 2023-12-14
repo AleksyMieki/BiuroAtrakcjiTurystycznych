@@ -11,7 +11,6 @@ public class InterfejsUzytkownika {
 	private boolean czyZalogowany = false;
 	Aplikacja aplikacja = Aplikacja.getInstance();
 
-
 	private void zaloguj() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -57,6 +56,9 @@ public class InterfejsUzytkownika {
 			System.out.println(atrakcja.getCzasOtwarcia());
 			System.out.println(atrakcja.getLokalizacja());
 		}
+		else{
+			System.out.println("nie znaleziono atrakcji o podanej nazwie\n");
+		}
 	}
 
 	private void podajMaila() {
@@ -101,13 +103,17 @@ public class InterfejsUzytkownika {
 
 				switch (wybor) {
 					case 1:
+
 						System.out.println("podaj haslo\n");
 						ui.zaloguj();
 						break;
+
 					case 2:
+
 						scanner.nextLine();
 						System.out.println("Podaj nazwe atrakcji");
 						String nazwa = scanner.nextLine();
+
 						Atrakcja atrakcja = ui.wyszukajAtrakcje(nazwa, ui.czyZalogowany);
 						
 						ui.wyswietlDaneAtrakcji(atrakcja);
@@ -124,8 +130,10 @@ public class InterfejsUzytkownika {
 				System.out.println("""
 						Dokonaj wyboru akcji
 						1. Zarzadzaj Atrakcja
+						2. Przegladaj zapytania uzytkownikow
 						2. wyloguj
 						""");
+
 				wybor = scanner.nextInt();
 
 				switch (wybor) {
@@ -136,7 +144,10 @@ public class InterfejsUzytkownika {
 						ui.czyZalogowany = false;
 						break;
 					case 3:
+
+						pracownikUI.zarzadzajZapytaniamiKlientow();
 						break;
+
 					case 4:
 						break;
 

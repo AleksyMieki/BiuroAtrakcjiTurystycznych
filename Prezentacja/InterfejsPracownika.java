@@ -3,7 +3,11 @@ package Prezentacja;
 
 import Aplikacja.Atrakcja;
 import Aplikacja.Dane;
+import Aplikacja.Zgloszenie;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class InterfejsPracownika extends InterfejsUzytkownika {
@@ -35,6 +39,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 				dane = podajDaneAtrakcji();
 
 			}while(aplikacja.sprawdzPoprawnosc(dane));
+
 			System.out.println("wprowadzono poprawne dane, tworze atrakcje");
 
 			aplikacja.utworzAtrakcje(dane);
@@ -43,7 +48,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 			return;
 		}
-		if(atrakcja != null)
+		if( atrakcja != null )
 		{
 			System.out.println("w bazie znaleziono taka atrakcje, czy chcesz ja teraz : \n1.usunac\n2.edytowac");
 
@@ -111,11 +116,26 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	}
 
-	private void zarzadzajZapytaniamiKlientow() {
-		// TODO - implement InterfejsPracownika.zarzadzajZapytaniamiKlientow
-		throw new UnsupportedOperationException();
-	}
+	public void zarzadzajZapytaniamiKlientow() {
 
+		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
+
+		wyswietlZapytania(lista);
+
+		if(czyOdpowiedziecNaZapytania())
+		{
+
+		}
+		else{
+			return;
+		}
+
+		return;
+	}
+	private int podajIdZapytania()
+	{
+		return 0;
+	}
 	private int wybierzEdycjeLubUsuniecie() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -140,6 +160,30 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	private void podajDaneDoEdytcji() {
 		// TODO - implement InterfejsPracownika.podajDaneDoEdytcji
 		throw new UnsupportedOperationException();
+	}
+
+	private void wyswietlZapytania(Collection<Zgloszenie> lista)
+	{
+		for (var v : lista) {
+			System.out.println(v.getTrescWiadomosci());
+			System.out.println(v.getId());
+			System.out.println(v.getTemat());
+			System.out.println();
+		}
+	}
+
+	private boolean czyOdpowiedziecNaZapytania()
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Czy chcesz odpowiedziec na jedno z zapytan(tak/nie)");
+		String potwierdzenie;
+		potwierdzenie = scanner.nextLine();
+
+		if(potwierdzenie.equals("tak")) return true;
+		else if (potwierdzenie.equals("nie")) return false;
+
+		return false;
+
 	}
 
 }

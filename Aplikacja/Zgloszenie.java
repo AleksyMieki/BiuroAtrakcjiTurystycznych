@@ -4,6 +4,7 @@ public class Zgloszenie {
 
 	private String temat;
 	private String email;
+	private int id;
 	private String trescWiadomosci;
 	private String dataWyslania;
 
@@ -24,4 +25,19 @@ public class Zgloszenie {
 		this.dataWyslania = dataWyslania;
 	}
 
+	public String getTemat() {
+		return temat;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getTrescWiadomosci() {
+		return trescWiadomosci;
+	}
 }
