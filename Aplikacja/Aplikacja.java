@@ -11,7 +11,7 @@ public class Aplikacja {
 	private int indeksAtrakcji;
 	private Atrakcja znalezionaAtrakcja;
 	private Collection<Zgloszenie> listaZgloszen = new ArrayList<>();
-	KasaBiletowa kasaBiletowa;
+	private KasaBiletowa kasaBiletowa;
 	private MenedzerWiadomosci menedzerWiadomosci;
 	private Atrakcja atrakcja;
 
@@ -58,7 +58,21 @@ public class Aplikacja {
 		}
 		return null;
 	}
+	public Zgloszenie getZgloszenieById(int id)
+	{
+		Zgloszenie znalezioneZgloszenie = null;
+		for (Zgloszenie z : listaZgloszen) {
+			if (z.getId() == id) {
+				znalezioneZgloszenie = z;
+				break;
+			}
+		}
 
+		if(znalezioneZgloszenie != null) {
+			return znalezioneZgloszenie;
+		}
+		return null;
+	}
 	/**
 	 * 
 	 * @param dane
@@ -69,9 +83,8 @@ public class Aplikacja {
 		return false;
 	}
 
-	public Atrakcja getListaAtrakcji() {
-		// TODO - implement Aplikacja.getListaAtrakcji
-		throw new UnsupportedOperationException();
+	public Collection<Atrakcja> getListaAtrakcji() {
+		return listaAtrakcji;
 	}
 
 	public Collection<Zgloszenie> getListaZgloszen() {
@@ -102,5 +115,17 @@ public class Aplikacja {
 
 		return;
 	}
+	public void zwrocBilet(Zgloszenie zgloszenie)
+	{
+		kasaBiletowa.zwrocBilet();
+	}
 
+	public MenedzerWiadomosci getMenedzerWiadomosci()
+	{
+		return menedzerWiadomosci;
+	}
+	public KasaBiletowa getKasaBiletowa()
+	{
+		return kasaBiletowa;
+	}
 }

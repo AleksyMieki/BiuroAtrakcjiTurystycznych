@@ -21,9 +21,8 @@ public class KasaBiletowa {
 		throw new UnsupportedOperationException();
 	}
 
-	public void wyszukajBilet() {
-		// TODO - implement KasaBiletowa.wyszukajBilet
-		throw new UnsupportedOperationException();
+	public void wyszukajBilet(int id) {
+
 	}
 
 }

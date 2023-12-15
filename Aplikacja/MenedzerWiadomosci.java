@@ -2,19 +2,25 @@ package Aplikacja;
 
 public class MenedzerWiadomosci {
 
-	public void wyslijWiadomosc() {
-		// TODO - implement MenedzerWiadomosci.wyslijWiadomosc
-		throw new UnsupportedOperationException();
+	public void wyslijWiadomosc(Zgloszenie zgloszenie, String wiadomosc) {
+
+		System.out.println("wyslalem wiadomosc " + wiadomosc + " na zgloszenie o tym temacie: " + zgloszenie.getTemat());
 	}
 
-	public boolean sprawdzenieMaila() {
-		// TODO - implement MenedzerWiadomosci.sprawdzenieMaila
-		throw new UnsupportedOperationException();
+	public boolean sprawdzenieMaila(String mail) {
+		return true;
 	}
 
-	public void sprawdzenieTematu() {
-		// TODO - implement MenedzerWiadomosci.sprawdzenieTematu
-		throw new UnsupportedOperationException();
+	public boolean sprawdzenieTematu(String temat) {
+
+		if(temat.equals("Zwrot biletu"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

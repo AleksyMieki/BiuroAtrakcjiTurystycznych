@@ -43,8 +43,22 @@ public class InterfejsUzytkownika {
 	}
 
 	private void wyslijZapytanieDoPracownika() {
-		// TODO - implement InterfejsUzytkownika.wyslijZapytanieDoPracownika
-		throw new UnsupportedOperationException();
+		Scanner scanner = new Scanner(System.in);
+		String wiadomosc;
+
+		do {
+			System.out.println("Podaj swojego maila");
+			wiadomosc = scanner.nextLine();
+		}while(aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(wiadomosc));
+
+		System.out.println("Podaj temat wiadomosci\n");
+
+		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(scanner.nextLine()))
+		{
+			aplikacja.getKasaBiletowa().wyszukajBilet(podajNumerBIletu());
+			//TODO finish this
+		}
+
 	}
 
 	private void wyswietlDaneAtrakcji(Atrakcja atrakcja)
@@ -66,9 +80,11 @@ public class InterfejsUzytkownika {
 		throw new UnsupportedOperationException();
 	}
 
-	private void podajNumerBIletu() {
-		// TODO - implement InterfejsUzytkownika.podajNumerBIletu
-		throw new UnsupportedOperationException();
+	private int podajNumerBIletu() {
+
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextInt();
+
 	}
 
 	private void podajTrescWiadomosci() {
@@ -97,6 +113,7 @@ public class InterfejsUzytkownika {
 						Dokonaj wyboru akcji
 						1. Zaloguj 1234
 						2. Wyszukaj Atrakcje
+						3. Wyslij Zapytanie
 						""");
 
 				wybor = scanner.nextInt();
@@ -120,6 +137,7 @@ public class InterfejsUzytkownika {
 
 						break;
 					case 3:
+						ui.wyslijZapytanieDoPracownika();
 						break;
 					case 4:
 						break;
@@ -131,7 +149,8 @@ public class InterfejsUzytkownika {
 						Dokonaj wyboru akcji
 						1. Zarzadzaj Atrakcja
 						2. Przegladaj zapytania uzytkownikow
-						2. wyloguj
+						3. Zarzadzaj zapytaniami klientow
+						4. wyloguj
 						""");
 
 				wybor = scanner.nextInt();
@@ -141,14 +160,14 @@ public class InterfejsUzytkownika {
 						pracownikUI.zarzadzajAtrakcja(ui.czyZalogowany);
 						break;
 					case 2:
-						ui.czyZalogowany = false;
+						pracownikUI.przegladajZakupioneBilety();
 						break;
 					case 3:
-
 						pracownikUI.zarzadzajZapytaniamiKlientow();
 						break;
-
 					case 4:
+						ui.czyZalogowany = false;
+
 						break;
 
 				}

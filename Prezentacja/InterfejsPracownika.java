@@ -83,11 +83,11 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	/**
 	 * 
-	 * @param czyZalogowany
+	 *
 	 */
-	private void przegladajZakupioneBilety(boolean czyZalogowany) {
-
-		throw new UnsupportedOperationException();
+	public void przegladajZakupioneBilety() {
+		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
+		wyswietlZapytania(lista);
 	}
 
 	private Dane podajDaneAtrakcji() {
@@ -118,24 +118,54 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	public void zarzadzajZapytaniamiKlientow() {
 
-		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
+		Zgloszenie zgloszenie;
+		int idZapytania = 0;
 
-		wyswietlZapytania(lista);
 
 		if(czyOdpowiedziecNaZapytania())
 		{
+			idZapytania = podajIdZapytania();
+			if(idZapytania == 0) return;
+
+			zgloszenie = aplikacja.getZgloszenieById(idZapytania);
+
+			if (zgloszenie == null) return;
+
+			if(zgloszenie.getTemat().equals("Zwroc bilet"))
+			{
+				if(czyZwrocicBilet(zgloszenie))
+				{
+					aplikacja.zwrocBilet(zgloszenie);
+					return;
+				}
+				else
+				{
+					return;
+				}
+			}
+			else
+			{
+				String wiadomosc = podajWiadomosc();
+				aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie,wiadomosc);
+				return;
+			}
 
 		}
 		else{
 			return;
 		}
 
-		return;
 	}
 	private int podajIdZapytania()
 	{
-		return 0;
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("podaj id szukanego zapytania : ");
+
+		return scanner.nextInt();
+
 	}
+
 	private int wybierzEdycjeLubUsuniecie() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -171,7 +201,25 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			System.out.println();
 		}
 	}
+	private boolean czyZwrocicBilet(Zgloszenie zgloszenie)
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Czy zwrocic bilet?(tak/nie)");
+		String potwierdzenie;
 
+		System.out.println(zgloszenie.getTemat());
+		System.out.println(zgloszenie.getEmail());
+		System.out.println(zgloszenie.getTrescWiadomosci());
+		System.out.println(zgloszenie.getDataWyslania());
+
+		potwierdzenie = scanner.nextLine();
+
+		if(potwierdzenie.equals("tak")) return true;
+		if(potwierdzenie.equals("nie")) return false;
+
+		return false;
+
+	}
 	private boolean czyOdpowiedziecNaZapytania()
 	{
 		Scanner scanner = new Scanner(System.in);
@@ -184,6 +232,14 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		return false;
 
+	}
+
+	private String podajWiadomosc()
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Podaj wiadomosc do wyslania");
+
+		return scanner.nextLine();
 	}
 
 }
