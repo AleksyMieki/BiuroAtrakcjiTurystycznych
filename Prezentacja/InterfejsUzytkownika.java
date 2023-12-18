@@ -49,14 +49,21 @@ public class InterfejsUzytkownika {
 		do {
 			System.out.println("Podaj swojego maila");
 			wiadomosc = scanner.nextLine();
-		}while(aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(wiadomosc));
+		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(wiadomosc));
 
-		System.out.println("Podaj temat wiadomosci\n");
+		System.out.println("Podaj temat wiadomosci");
 
 		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(scanner.nextLine()))
 		{
+			System.out.println("Podaj numer biletu");
 			aplikacja.getKasaBiletowa().wyszukajBilet(podajNumerBIletu());
 			//TODO finish this
+		}
+		else{
+
+			System.out.println("Podaj tresc twojej wiadomosci");
+			podajTrescWiadomosci();
+
 		}
 
 	}
@@ -87,9 +94,11 @@ public class InterfejsUzytkownika {
 
 	}
 
-	private void podajTrescWiadomosci() {
-		// TODO - implement InterfejsUzytkownika.podajTrescWiadomosci
-		throw new UnsupportedOperationException();
+	private String podajTrescWiadomosci() {
+
+		Scanner scanner = new Scanner(System.in);
+
+		return scanner.nextLine();
 	}
 
 	private void podajTemat() {

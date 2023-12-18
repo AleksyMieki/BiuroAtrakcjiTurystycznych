@@ -11,8 +11,8 @@ public class Aplikacja {
 	private int indeksAtrakcji;
 	private Atrakcja znalezionaAtrakcja;
 	private Collection<Zgloszenie> listaZgloszen = new ArrayList<>();
-	private KasaBiletowa kasaBiletowa;
-	private MenedzerWiadomosci menedzerWiadomosci;
+	private KasaBiletowa kasaBiletowa = new KasaBiletowa();
+	private MenedzerWiadomosci menedzerWiadomosci = new MenedzerWiadomosci();
 	private Atrakcja atrakcja;
 
 	public static Aplikacja getInstance() {
