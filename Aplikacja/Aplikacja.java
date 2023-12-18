@@ -28,6 +28,11 @@ public class Aplikacja {
 		Dane dane2 = new Dane("luwr",1,"aaa","aaa");
 		Dane dane3 = new Dane("mona",1,"aaa","aaa");
 
+		Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl",1,"tresc wiadomosci numer 1", "12.12.2023");
+		Zgloszenie zgloszenie2 = new Zgloszenie("kiedy otwarcie", "a@.pl",2,"tresc wiadomosci numer 2", "12.12.2023");
+
+		listaZgloszen.add(zgloszenie);
+		listaZgloszen.add(zgloszenie2);
 		listaAtrakcji.add(new Atrakcja(dane));
 		listaAtrakcji.add(new Atrakcja(dane2));
 		listaAtrakcji.add(new Atrakcja(dane3));
@@ -114,10 +119,6 @@ public class Aplikacja {
 		listaAtrakcji.add(nowaAtrakcja);
 
 		return;
-	}
-	public void zwrocBilet(Zgloszenie zgloszenie)
-	{
-		kasaBiletowa.zwrocBilet();
 	}
 
 	public MenedzerWiadomosci getMenedzerWiadomosci()

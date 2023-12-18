@@ -81,13 +81,11 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return;
 	}
 
-	/**
-	 * 
-	 *
-	 */
-	public void przegladajZakupioneBilety() {
+	public void przegladajZgloszenia() {
+
 		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
 		wyswietlZapytania(lista);
+
 	}
 
 	private Dane podajDaneAtrakcji() {
@@ -121,21 +119,21 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		Zgloszenie zgloszenie;
 		int idZapytania = 0;
 
+		idZapytania = podajIdZapytania();
 
-		if(czyOdpowiedziecNaZapytania())
+		if(idZapytania == 0) return;
+
+		zgloszenie = aplikacja.getZgloszenieById(idZapytania);
+
+		if (zgloszenie == null) return;
+
+		if(czyOdpowiedziecNaZapytanie(zgloszenie))
 		{
-			idZapytania = podajIdZapytania();
-			if(idZapytania == 0) return;
-
-			zgloszenie = aplikacja.getZgloszenieById(idZapytania);
-
-			if (zgloszenie == null) return;
-
-			if(zgloszenie.getTemat().equals("Zwroc bilet"))
+			if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
 			{
 				if(czyZwrocicBilet(zgloszenie))
 				{
-					aplikacja.zwrocBilet(zgloszenie);
+					aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
 					return;
 				}
 				else
@@ -145,8 +143,10 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			}
 			else
 			{
+				System.out.println("Podaj wiadomosc do wyslania");
 				String wiadomosc = podajWiadomosc();
 				aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie,wiadomosc);
+
 				return;
 			}
 
@@ -187,10 +187,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		return false;
 	}
-	private void podajDaneDoEdytcji() {
-		// TODO - implement InterfejsPracownika.podajDaneDoEdytcji
-		throw new UnsupportedOperationException();
-	}
 
 	private void wyswietlZapytania(Collection<Zgloszenie> lista)
 	{
@@ -220,10 +216,15 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return false;
 
 	}
-	private boolean czyOdpowiedziecNaZapytania()
+	private boolean czyOdpowiedziecNaZapytanie(Zgloszenie zgloszenie)
 	{
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Czy chcesz odpowiedziec na jedno z zapytan(tak/nie)");
+		System.out.println(zgloszenie.getTemat());
+		System.out.println(zgloszenie.getEmail());
+		System.out.println(zgloszenie.getTrescWiadomosci());
+		System.out.println(zgloszenie.getDataWyslania());
+		System.out.println("Czy chcesz odpowiedziec na zgloszenie(tak/nie)");
+
 		String potwierdzenie;
 		potwierdzenie = scanner.nextLine();
 
@@ -237,7 +238,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	private String podajWiadomosc()
 	{
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Podaj wiadomosc do wyslania");
+
 
 		return scanner.nextLine();
 	}

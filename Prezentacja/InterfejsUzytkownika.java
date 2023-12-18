@@ -35,36 +35,61 @@ public class InterfejsUzytkownika {
 		{
 
 			System.out.println("IMPLEMENTACJA KUP BILET");
-
 			return atrakcja;
+
 		}
 		return null;
 
 	}
 
 	private void wyslijZapytanieDoPracownika() {
+
 		Scanner scanner = new Scanner(System.in);
+		Bilet bilet;
 		String wiadomosc;
+		String mail;
+		String temat;
+		int numerBiletu;
 
 		do {
 			System.out.println("Podaj swojego maila");
-			wiadomosc = scanner.nextLine();
-		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(wiadomosc));
+			mail = podajMaila();
+		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(mail));
 
-		System.out.println("Podaj temat wiadomosci");
+		System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
+		temat = podajTemat();
 
-		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(scanner.nextLine()))
+		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(temat))
 		{
 			System.out.println("Podaj numer biletu");
-			aplikacja.getKasaBiletowa().wyszukajBilet(podajNumerBIletu());
-			//TODO finish this
+
+			numerBiletu = podajNumerBiletu();
+
+			bilet = aplikacja.getKasaBiletowa().wyszukajBilet(numerBiletu);
+
+			if(bilet == null )
+			{
+				System.out.println("nie istnieje taki bilet");
+				return;
+			}
+			if(aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(bilet)) {
+				aplikacja.getKasaBiletowa().zwrocBilet(bilet);
+				return;
+			}
+
 		}
-		else{
+
 
 			System.out.println("Podaj tresc twojej wiadomosci");
-			podajTrescWiadomosci();
+			wiadomosc = podajTrescWiadomosci();
 
-		}
+			Zgloszenie zgloszenie = new Zgloszenie(temat,mail,aplikacja.getListaZgloszen().size() + 1,wiadomosc,"12.12.2024");
+			aplikacja.getListaZgloszen().add(zgloszenie);
+
+			aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie);
+
+			System.out.println("twoje zgloszenie zostalo wyslane\n" + zgloszenie.getEmail() + "\n" + zgloszenie.getTemat() +"\n" + zgloszenie.getTrescWiadomosci());
+
 
 	}
 
@@ -82,29 +107,27 @@ public class InterfejsUzytkownika {
 		}
 	}
 
-	private void podajMaila() {
-		// TODO - implement InterfejsUzytkownika.podajMaila
-		throw new UnsupportedOperationException();
-	}
-
-	private int podajNumerBIletu() {
-
+	private String podajMaila() {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
-
-	}
-
-	private String podajTrescWiadomosci() {
-
-		Scanner scanner = new Scanner(System.in);
-
 		return scanner.nextLine();
 	}
 
-	private void podajTemat() {
-		// TODO - implement InterfejsUzytkownika.podajTemat
-		throw new UnsupportedOperationException();
+	private String podajTemat()
+	{
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
 	}
+
+	private int podajNumerBiletu() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextInt();
+	}
+
+	private String podajTrescWiadomosci() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
+	}
+
 
 	public static void main(String[] args) {
 
@@ -169,7 +192,7 @@ public class InterfejsUzytkownika {
 						pracownikUI.zarzadzajAtrakcja(ui.czyZalogowany);
 						break;
 					case 2:
-						pracownikUI.przegladajZakupioneBilety();
+						pracownikUI.przegladajZgloszenia();
 						break;
 					case 3:
 						pracownikUI.zarzadzajZapytaniamiKlientow();

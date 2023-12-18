@@ -7,16 +7,17 @@ public class Bilet {
 	private String nazwaAtrakcji;
 	private String dataAtrakcji;
 	private String lokalizacja;
-	private String cenaBiletu;
+	private float cenaBiletu;
 	private String dataZakupu;
 
-	/**
-	 * 
-	 * @param atrakcja
-	 */
-	public void utworzBilet(Atrakcja atrakcja) {
-		// TODO - implement Bilet.utworzBilet
-		throw new UnsupportedOperationException();
+	public Bilet(String email, int numerBiletu, String nazwaAtrakcji, String dataAtrakcji, String lokalizacja, float cenaBiletu, String dataZakupu) {
+		this.email = email;
+		this.numerBiletu = numerBiletu;
+		this.nazwaAtrakcji = nazwaAtrakcji;
+		this.dataAtrakcji = dataAtrakcji;
+		this.lokalizacja = lokalizacja;
+		this.cenaBiletu = cenaBiletu;
+		this.dataZakupu = dataZakupu;
 	}
 
 	public String getEmail() {
@@ -79,7 +80,7 @@ public class Bilet {
 		this.lokalizacja = lokalizacja;
 	}
 
-	public String getCenaBiletu() {
+	public float getCenaBiletu() {
 		return this.cenaBiletu;
 	}
 
@@ -87,7 +88,7 @@ public class Bilet {
 	 * 
 	 * @param cenaBiletu
 	 */
-	public void setCenaBiletu(String cenaBiletu) {
+	public void setCenaBiletu(float cenaBiletu) {
 		this.cenaBiletu = cenaBiletu;
 	}
 

@@ -8,10 +8,14 @@ public class Zgloszenie {
 	private String trescWiadomosci;
 	private String dataWyslania;
 
-	public void utworzZgloszenie() {
-		// TODO - implement Zgloszenie.utworzZgloszenie
-		throw new UnsupportedOperationException();
+	public Zgloszenie(String temat, String email, int id, String trescWiadomosci, String dataWyslania) {
+		this.temat = temat;
+		this.email = email;
+		this.id = id;
+		this.trescWiadomosci = trescWiadomosci;
+		this.dataWyslania = dataWyslania;
 	}
+
 
 	public String getDataWyslania() {
 		return this.dataWyslania;
