@@ -44,11 +44,9 @@ public class Aplikacja {
 	/**
 	 * 
 	 * @param nazwa
-	 * @param czyZalogowany
-	 */
+     */
 
-	public Atrakcja wyszukajAtrakcje(String nazwa, boolean czyZalogowany) {
-
+	public Atrakcja wyszukajAtrakcje(String nazwa) {
 
 		Atrakcja znalezionaAtrakcja = null;
 		for (Atrakcja atrakcja : listaAtrakcji) {
@@ -102,11 +100,8 @@ public class Aplikacja {
 
 	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
 
-		atrakcja.setNazwa(daneDoEdycji.getNazwa());
-		atrakcja.setCena(daneDoEdycji.getCena());
-		atrakcja.setCzasOtwarcia(daneDoEdycji.getCzasOtwarcia());
-		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
-
+		usunAtrakcje(atrakcja);
+		utworzAtrakcje(daneDoEdycji);
 	}
 
 	/**

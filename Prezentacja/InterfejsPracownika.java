@@ -5,34 +5,24 @@ import Aplikacja.Atrakcja;
 import Aplikacja.Dane;
 import Aplikacja.Zgloszenie;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
 public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	/**
-	 * 
+	 *
 	 * @param czyZalogowany
 	 */
 	public void zarzadzajAtrakcja(boolean czyZalogowany) {
-
-		Scanner scanner = new Scanner(System.in);
-		String nazwaAtrakcji;
-
 		Atrakcja atrakcja;
-
 		Dane dane;
 
-		System.out.println("Podaj nazwe szukanej atrakcji");
-		nazwaAtrakcji = scanner.nextLine();
-
-		atrakcja = wyszukajAtrakcje(nazwaAtrakcji,czyZalogowany);
+		atrakcja = wyszukajAtrakcje(czyZalogowany);
 
 		if(atrakcja == null)
 		{
-			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji");
+			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji, dodawanie nowej");
 
 			do {
 
@@ -45,10 +35,8 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			aplikacja.utworzAtrakcje(dane);
 
 			System.out.println("Atrakcje utwozono pomyslnie");
-
-			return;
 		}
-		if( atrakcja != null )
+		else
 		{
 			System.out.println("w bazie znaleziono taka atrakcje, czy chcesz ja teraz : \n1.usunac\n2.edytowac");
 
@@ -72,13 +60,8 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 					System.out.println("Pomyslnie zmodyfikowano dane atrakcji");
 
 					break;
-
-				default:
-					return;
 			}
 		}
-
-		return;
 	}
 
 	public void przegladajZgloszenia() {
@@ -117,42 +100,28 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	public void zarzadzajZapytaniamiKlientow() {
 
 		Zgloszenie zgloszenie;
-		int idZapytania = 0;
+		int idZgloszenia = 0;
 
-		idZapytania = podajIdZapytania();
+		idZgloszenia = podajIdZapytania();
 
-		if(idZapytania == 0) return;
-
-		zgloszenie = aplikacja.getZgloszenieById(idZapytania);
+		zgloszenie = aplikacja.getZgloszenieById(idZgloszenia);
 
 		if (zgloszenie == null) return;
 
-		if(czyOdpowiedziecNaZapytanie(zgloszenie))
+		if(!czyOdpowiedziecNaZgloszenie(zgloszenie)) return;
+
+		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
 		{
-			if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
+			if(czyZwrocicBilet(zgloszenie))
 			{
-				if(czyZwrocicBilet(zgloszenie))
-				{
-					aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
-					return;
-				}
-				else
-				{
-					return;
-				}
+				aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
 			}
-			else
-			{
-				System.out.println("Podaj wiadomosc do wyslania");
-				String wiadomosc = podajWiadomosc();
-				aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie,wiadomosc);
-
-				return;
-			}
-
 		}
-		else{
-			return;
+		else
+		{
+			System.out.println("Podaj wiadomosc do wyslania");
+			String wiadomosc = podajWiadomosc();
+			aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie,wiadomosc);
 		}
 
 	}
@@ -216,7 +185,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return false;
 
 	}
-	private boolean czyOdpowiedziecNaZapytanie(Zgloszenie zgloszenie)
+	private boolean czyOdpowiedziecNaZgloszenie(Zgloszenie zgloszenie)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println(zgloszenie.getTemat());

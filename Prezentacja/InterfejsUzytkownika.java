@@ -22,39 +22,70 @@ public class InterfejsUzytkownika {
 
 	}
 
-	protected Atrakcja wyszukajAtrakcje(String nazwa, boolean czyZalogowany) {
+	private String podajNazwe() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
+	}
 
-		Atrakcja atrakcja = aplikacja.wyszukajAtrakcje(nazwa,czyZalogowany);
+	private boolean czyKupicBilet() {
+		Scanner scanner = new Scanner(System.in);
 
-		if(czyZalogowany && atrakcja != null)
+		System.out.println("""
+						Czy kupić bilet?
+						1. tak
+						aby nie kupować biletu, wprowadź dowolny znak
+						""");
+
+		String wybor = scanner.nextLine();
+
+		switch (wybor) {
+			case "1": {
+				return true;
+			}
+			default: {
+				return false;
+			}
+		}
+    }
+
+	protected Atrakcja wyszukajAtrakcje(boolean czyZalogowany) {
+
+		System.out.println("Podaj nazwę szukanej atrakcji:");
+
+		String nazwa = podajNazwe();
+
+		Atrakcja atrakcja = aplikacja.wyszukajAtrakcje(nazwa);
+
+		if(atrakcja == null){
+			return null;
+		}
+
+		if(czyZalogowany)
 		{
 			System.out.println("atrakcja znaleziona dla pracownika");
 			return atrakcja;
 		}
-		else if(atrakcja != null)
+
+		if(czyKupicBilet())
 		{
-
-			System.out.println("IMPLEMENTACJA KUP BILET");
-			return atrakcja;
-
+			System.out.println("IMPLEMENTACJA KUP BILET");;
 		}
-		return null;
 
+		return atrakcja;
 	}
 
 	private void wyslijZapytanieDoPracownika() {
 
-		Scanner scanner = new Scanner(System.in);
 		Bilet bilet;
 		String wiadomosc;
-		String mail;
+		String email;
 		String temat;
 		int numerBiletu;
 
 		do {
 			System.out.println("Podaj swojego maila");
-			mail = podajMaila();
-		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(mail));
+			email = podajMaila();
+		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(email));
 
 		System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
 		temat = podajTemat();
@@ -83,7 +114,7 @@ public class InterfejsUzytkownika {
 			System.out.println("Podaj tresc twojej wiadomosci");
 			wiadomosc = podajTrescWiadomosci();
 
-			Zgloszenie zgloszenie = new Zgloszenie(temat,mail,aplikacja.getListaZgloszen().size() + 1,wiadomosc,"12.12.2024");
+			Zgloszenie zgloszenie = new Zgloszenie(temat,email,aplikacja.getListaZgloszen().size() + 1,wiadomosc,"12.12.2024");
 			aplikacja.getListaZgloszen().add(zgloszenie);
 
 			aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie);
@@ -159,11 +190,7 @@ public class InterfejsUzytkownika {
 
 					case 2:
 
-						scanner.nextLine();
-						System.out.println("Podaj nazwe atrakcji");
-						String nazwa = scanner.nextLine();
-
-						Atrakcja atrakcja = ui.wyszukajAtrakcje(nazwa, ui.czyZalogowany);
+						Atrakcja atrakcja = ui.wyszukajAtrakcje(ui.czyZalogowany);
 						
 						ui.wyswietlDaneAtrakcji(atrakcja);
 
