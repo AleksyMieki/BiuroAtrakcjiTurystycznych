@@ -2,14 +2,12 @@ package Prezentacja;
 
 import Aplikacja.*;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class InterfejsUzytkownika {
 
-	private Dane dane;
 	private boolean czyZalogowany = false;
-	Aplikacja aplikacja = Aplikacja.getInstance();
+	protected Aplikacja aplikacja = Aplikacja.getInstance();
 
 	private void zaloguj() {
 
@@ -70,9 +68,12 @@ public class InterfejsUzytkownika {
 			if(bilet == null )
 			{
 				System.out.println("nie istnieje taki bilet");
+
 				return;
 			}
+
 			if(aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(bilet)) {
+				System.out.println("bilet zostal zwrocony");
 				aplikacja.getKasaBiletowa().zwrocBilet(bilet);
 				return;
 			}
@@ -82,13 +83,6 @@ public class InterfejsUzytkownika {
 
 			System.out.println("Podaj tresc twojej wiadomosci");
 			wiadomosc = podajTrescWiadomosci();
-
-			Zgloszenie zgloszenie = new Zgloszenie(temat,mail,aplikacja.getListaZgloszen().size() + 1,wiadomosc,"12.12.2024");
-			aplikacja.getListaZgloszen().add(zgloszenie);
-
-			aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie);
-
-			System.out.println("twoje zgloszenie zostalo wyslane\n" + zgloszenie.getEmail() + "\n" + zgloszenie.getTemat() +"\n" + zgloszenie.getTrescWiadomosci());
 
 
 	}

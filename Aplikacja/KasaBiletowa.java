@@ -4,7 +4,7 @@ import java.util.*;
 
 public class KasaBiletowa {
 
-	private Collection<Bilet> listaBiletow = new ArrayList<>();
+	private ArrayList<Bilet> listaBiletow = new ArrayList<>();
 
 	public KasaBiletowa()
 	{
@@ -19,8 +19,9 @@ public class KasaBiletowa {
 	}
 	public boolean sprawdzDateWydarzenia(Bilet bilet) {
 
-		if(bilet.getDataAtrakcji().equals("10.10.2023")) return true;
-		return false;
+		return true;
+
+
 	}
 
 	public void zwrocBiletPrzezZgloszenie(Zgloszenie zgloszenie) {

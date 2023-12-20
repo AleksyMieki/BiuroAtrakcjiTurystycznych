@@ -1,7 +1,5 @@
 package Aplikacja;
 
-import java.math.BigDecimal;
-
 public class Dane {
 
 	private String nazwa;

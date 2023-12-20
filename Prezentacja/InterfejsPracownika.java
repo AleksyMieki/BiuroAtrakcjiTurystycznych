@@ -5,13 +5,12 @@ import Aplikacja.Atrakcja;
 import Aplikacja.Dane;
 import Aplikacja.Zgloszenie;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
 public class InterfejsPracownika extends InterfejsUzytkownika {
 
+	Dane dane;
 	/**
 	 * 
 	 * @param czyZalogowany
@@ -22,8 +21,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		String nazwaAtrakcji;
 
 		Atrakcja atrakcja;
-
-		Dane dane;
 
 		System.out.println("Podaj nazwe szukanej atrakcji");
 		nazwaAtrakcji = scanner.nextLine();
@@ -145,7 +142,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			{
 				System.out.println("Podaj wiadomosc do wyslania");
 				String wiadomosc = podajWiadomosc();
-				aplikacja.getMenedzerWiadomosci().wyslijWiadomosc(zgloszenie,wiadomosc);
+				aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 
 				return;
 			}
@@ -219,6 +216,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	private boolean czyOdpowiedziecNaZapytanie(Zgloszenie zgloszenie)
 	{
 		Scanner scanner = new Scanner(System.in);
+
 		System.out.println(zgloszenie.getTemat());
 		System.out.println(zgloszenie.getEmail());
 		System.out.println(zgloszenie.getTrescWiadomosci());
@@ -238,8 +236,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	private String podajWiadomosc()
 	{
 		Scanner scanner = new Scanner(System.in);
-
-
 		return scanner.nextLine();
 	}
 

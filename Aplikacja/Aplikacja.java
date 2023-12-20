@@ -1,7 +1,6 @@
 package Aplikacja;
 
 import java.util.*;
-import java.util.Scanner;
 
 public class Aplikacja {
 
@@ -22,6 +21,14 @@ public class Aplikacja {
 		return instance;
 	}
 
+	public void utworzZgloszenie(String email, String temat, String trescWiadomosci)
+	{
+		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size() + 1,trescWiadomosci,"12.12.2024");
+		listaZgloszen.add(zgloszenie);
+
+		menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
+
+	}
 	private Aplikacja()
 	{
 		Dane dane = new Dane("piza",1,"aaa","aaa");
@@ -33,6 +40,7 @@ public class Aplikacja {
 
 		listaZgloszen.add(zgloszenie);
 		listaZgloszen.add(zgloszenie2);
+
 		listaAtrakcji.add(new Atrakcja(dane));
 		listaAtrakcji.add(new Atrakcja(dane2));
 		listaAtrakcji.add(new Atrakcja(dane3));
@@ -84,7 +92,6 @@ public class Aplikacja {
 	 */
 	public boolean sprawdzPoprawnosc(Dane dane) {
 
-
 		return false;
 	}
 
@@ -97,16 +104,16 @@ public class Aplikacja {
 	}
 
 	public void usunAtrakcje(Atrakcja atrakcjaDoUsuniecia) {
+
 		listaAtrakcji.removeIf(atrakcja -> atrakcja.getNazwa().equals(atrakcjaDoUsuniecia.getNazwa()));
+
 	}
 
 	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
-
 		atrakcja.setNazwa(daneDoEdycji.getNazwa());
 		atrakcja.setCena(daneDoEdycji.getCena());
 		atrakcja.setCzasOtwarcia(daneDoEdycji.getCzasOtwarcia());
 		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
-
 	}
 
 	/**

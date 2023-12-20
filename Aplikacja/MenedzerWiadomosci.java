@@ -4,14 +4,14 @@ import java.util.Locale;
 
 public class MenedzerWiadomosci {
 
-	public void wyslijWiadomosc(Zgloszenie zgloszenie, String wiadomosc) {
+	public void wyslijWiadomoscPracownik(Zgloszenie zgloszenie, String wiadomosc) {
 
 		System.out.println("wyslalem wiadomosc " + wiadomosc + " na zgloszenie o tym temacie: " + zgloszenie.getTemat());
 	}
 
 	public void wyslijWiadomosc(Zgloszenie wiadomosc)
 	{
-
+		System.out.println("wyslano wiadomosc o podanej tresci " + wiadomosc.getTrescWiadomosci());
 	}
 
 	public boolean sprawdzenieMaila(String mail) {
