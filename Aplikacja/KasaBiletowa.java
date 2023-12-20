@@ -37,8 +37,8 @@ public class KasaBiletowa {
 	}
 
 	public void kupBilet(Atrakcja atrakcja) {
-		// TODO - implement KasaBiletowa.kubBilet
-		throw new UnsupportedOperationException();
+		listaBiletow.add(new Bilet("a@gmail.com",listaBiletow.size()+1,atrakcja.getNazwa(),atrakcja.getCzasOtwarcia(),atrakcja.getLokalizacja(),atrakcja.getCena(),"20.12.2023"));
+
 	}
 
 	public Bilet wyszukajBilet(int id) {
