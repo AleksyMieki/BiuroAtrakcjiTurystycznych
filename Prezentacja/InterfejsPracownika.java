@@ -10,45 +10,32 @@ import java.util.Scanner;
 
 public class InterfejsPracownika extends InterfejsUzytkownika {
 
-	Dane dane;
 	/**
-	 * 
+	 *
 	 * @param czyZalogowany
 	 */
 	public void zarzadzajAtrakcja(boolean czyZalogowany) {
-
-		Scanner scanner = new Scanner(System.in);
-		String nazwaAtrakcji;
-
 		Atrakcja atrakcja;
+		Dane atrybutyAtrakcji;
 
-		System.out.println("Podaj nazwe szukanej atrakcji");
-		nazwaAtrakcji = scanner.nextLine();
-
-		atrakcja = wyszukajAtrakcje(nazwaAtrakcji,czyZalogowany);
+		atrakcja = wyszukajAtrakcje(czyZalogowany);
 
 		if(atrakcja == null)
 		{
-			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji");
+			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji, dodawanie nowej");
 
 			do {
 
-				dane = podajDaneAtrakcji();
+				atrybutyAtrakcji = podajDaneAtrakcji();
 
-			}while(aplikacja.sprawdzPoprawnosc(dane));
-
+			}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
 			System.out.println("wprowadzono poprawne dane, tworze atrakcje");
-
-			aplikacja.utworzAtrakcje(dane);
-
+			aplikacja.utworzAtrakcje(atrybutyAtrakcji);
 			System.out.println("Atrakcje utwozono pomyslnie");
-
-			return;
 		}
-		if( atrakcja != null )
+		else
 		{
 			System.out.println("w bazie znaleziono taka atrakcje, czy chcesz ja teraz : \n1.usunac\n2.edytowac");
-
 			switch (wybierzEdycjeLubUsuniecie())
 			{
 				case 1:
@@ -57,25 +44,15 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 						aplikacja.usunAtrakcje(atrakcja);
 					}
 					break;
-
 				case 2:
 					do {
-
-						dane = podajDaneAtrakcji();
-
-					}while(aplikacja.sprawdzPoprawnosc(dane));
-
-					aplikacja.edytujAtrakcje(atrakcja, dane);
+						atrybutyAtrakcji = podajDaneAtrakcji();
+					}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
+					aplikacja.edytujAtrakcje(atrakcja, atrybutyAtrakcji);
 					System.out.println("Pomyslnie zmodyfikowano dane atrakcji");
-
 					break;
-
-				default:
-					return;
 			}
 		}
-
-		return;
 	}
 
 	public void przegladajZgloszenia() {
@@ -114,42 +91,30 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	public void zarzadzajZapytaniamiKlientow() {
 
 		Zgloszenie zgloszenie;
-		int idZapytania = 0;
+		int idZgloszenia = 0;
 
-		idZapytania = podajIdZapytania();
+		idZgloszenia = podajIdZapytania();
 
-		if(idZapytania == 0) return;
-
-		zgloszenie = aplikacja.getZgloszenieById(idZapytania);
+		zgloszenie = aplikacja.getZgloszenieById(idZgloszenia);
 
 		if (zgloszenie == null) return;
 
-		if(czyOdpowiedziecNaZapytanie(zgloszenie))
+		if(!czyOdpowiedziecNaZgloszenie(zgloszenie)) return;
+
+		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
 		{
-			if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
+			if(czyZwrocicBilet(zgloszenie))
 			{
-				if(czyZwrocicBilet(zgloszenie))
-				{
-					aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
-					return;
-				}
-				else
-				{
-					return;
-				}
+				aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
 			}
-			else
-			{
-				System.out.println("Podaj wiadomosc do wyslania");
-				String wiadomosc = podajWiadomosc();
-				aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
-
-				return;
-			}
-
 		}
-		else{
-			return;
+		else
+		{
+
+			System.out.println("Podaj wiadomosc do wyslania");
+			String wiadomosc = podajWiadomosc();
+			aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
+
 		}
 
 	}
@@ -213,10 +178,9 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return false;
 
 	}
-	private boolean czyOdpowiedziecNaZapytanie(Zgloszenie zgloszenie)
+	private boolean czyOdpowiedziecNaZgloszenie(Zgloszenie zgloszenie)
 	{
 		Scanner scanner = new Scanner(System.in);
-
 		System.out.println(zgloszenie.getTemat());
 		System.out.println(zgloszenie.getEmail());
 		System.out.println(zgloszenie.getTrescWiadomosci());
@@ -236,6 +200,8 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	private String podajWiadomosc()
 	{
 		Scanner scanner = new Scanner(System.in);
+
+
 		return scanner.nextLine();
 	}
 

@@ -1,6 +1,7 @@
 package Aplikacja;
 
 import java.util.*;
+import java.util.Scanner;
 
 public class Aplikacja {
 
@@ -21,14 +22,6 @@ public class Aplikacja {
 		return instance;
 	}
 
-	public void utworzZgloszenie(String email, String temat, String trescWiadomosci)
-	{
-		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size() + 1,trescWiadomosci,"12.12.2024");
-		listaZgloszen.add(zgloszenie);
-
-		menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
-
-	}
 	private Aplikacja()
 	{
 		Dane dane = new Dane("piza",1,"aaa","aaa");
@@ -40,7 +33,6 @@ public class Aplikacja {
 
 		listaZgloszen.add(zgloszenie);
 		listaZgloszen.add(zgloszenie2);
-
 		listaAtrakcji.add(new Atrakcja(dane));
 		listaAtrakcji.add(new Atrakcja(dane2));
 		listaAtrakcji.add(new Atrakcja(dane3));
@@ -50,13 +42,11 @@ public class Aplikacja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param nazwa
-	 * @param czyZalogowany
 	 */
 
-	public Atrakcja wyszukajAtrakcje(String nazwa, boolean czyZalogowany) {
-
+	public Atrakcja wyszukajAtrakcje(String nazwa) {
 
 		Atrakcja znalezionaAtrakcja = null;
 		for (Atrakcja atrakcja : listaAtrakcji) {
@@ -71,6 +61,7 @@ public class Aplikacja {
 		}
 		return null;
 	}
+
 	public Zgloszenie getZgloszenieById(int id)
 	{
 		Zgloszenie znalezioneZgloszenie = null;
@@ -87,12 +78,22 @@ public class Aplikacja {
 		return null;
 	}
 	/**
-	 * 
+	 *
 	 * @param dane
 	 */
 	public boolean sprawdzPoprawnosc(Dane dane) {
 
+
 		return false;
+	}
+
+	public void utworzZgloszenie(String email, String temat, String wiadomosc)
+	{
+		Zgloszenie zgloszenie = new Zgloszenie(email,temat,listaZgloszen.size()+1,wiadomosc,"20.12.2023");
+		listaZgloszen.add(zgloszenie);
+
+		menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
+
 	}
 
 	public Collection<Atrakcja> getListaAtrakcji() {
@@ -104,9 +105,7 @@ public class Aplikacja {
 	}
 
 	public void usunAtrakcje(Atrakcja atrakcjaDoUsuniecia) {
-
 		listaAtrakcji.removeIf(atrakcja -> atrakcja.getNazwa().equals(atrakcjaDoUsuniecia.getNazwa()));
-
 	}
 
 	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
@@ -117,12 +116,13 @@ public class Aplikacja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param atrybutyAtrakcji
 	 */
 	public void utworzAtrakcje(Dane atrybutyAtrakcji) {
 
-		Atrakcja nowaAtrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),atrybutyAtrakcji.getCzasOtwarcia(),atrybutyAtrakcji.getLokalizacja());
+		Atrakcja nowaAtrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
+				atrybutyAtrakcji.getCzasOtwarcia(),atrybutyAtrakcji.getLokalizacja());
 		listaAtrakcji.add(nowaAtrakcja);
 
 		return;

@@ -2,12 +2,14 @@ package Prezentacja;
 
 import Aplikacja.*;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class InterfejsUzytkownika {
 
+	private Dane dane;
 	private boolean czyZalogowany = false;
-	protected Aplikacja aplikacja = Aplikacja.getInstance();
+	Aplikacja aplikacja = Aplikacja.getInstance();
 
 	private void zaloguj() {
 
@@ -20,39 +22,68 @@ public class InterfejsUzytkownika {
 
 	}
 
-	protected Atrakcja wyszukajAtrakcje(String nazwa, boolean czyZalogowany) {
+	private String podajNazwe() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
+	}
 
-		Atrakcja atrakcja = aplikacja.wyszukajAtrakcje(nazwa,czyZalogowany);
+	private boolean czyKupicBilet() {
+		Scanner scanner = new Scanner(System.in);
 
-		if(czyZalogowany && atrakcja != null)
+		System.out.println("""
+						Czy kupić bilet?
+						1. tak
+						aby nie kupować biletu, wprowadź dowolny znak
+						""");
+
+		String wybor = scanner.nextLine();
+
+		switch (wybor) {
+			case "1": {
+				return true;
+			}
+			default: {
+				return false;
+			}
+		}
+	}
+
+	protected Atrakcja wyszukajAtrakcje(boolean czyZalogowany) {
+
+		System.out.println("Podaj nazwę szukanej atrakcji:");
+
+		String nazwa = podajNazwe();
+
+		Atrakcja atrakcja = aplikacja.wyszukajAtrakcje(nazwa);
+
+		if(atrakcja == null){
+			return null;
+		}
+
+		if(czyZalogowany)
 		{
 			System.out.println("atrakcja znaleziona dla pracownika");
 			return atrakcja;
 		}
-		else if(atrakcja != null)
+
+		if(czyKupicBilet())
 		{
-
-			System.out.println("IMPLEMENTACJA KUP BILET");
-			return atrakcja;
-
+			aplikacja.getKasaBiletowa().kupBilet(atrakcja);
 		}
-		return null;
 
+		return atrakcja;
 	}
 
 	private void wyslijZapytanieDoPracownika() {
-
-		Scanner scanner = new Scanner(System.in);
 		Bilet bilet;
 		String wiadomosc;
-		String mail;
+		String email;
 		String temat;
 		int numerBiletu;
-
 		do {
 			System.out.println("Podaj swojego maila");
-			mail = podajMaila();
-		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(mail));
+			email = podajMaila();
+		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(email));
 
 		System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
 		temat = podajTemat();
@@ -60,30 +91,24 @@ public class InterfejsUzytkownika {
 		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(temat))
 		{
 			System.out.println("Podaj numer biletu");
-
 			numerBiletu = podajNumerBiletu();
-
 			bilet = aplikacja.getKasaBiletowa().wyszukajBilet(numerBiletu);
 
 			if(bilet == null )
 			{
 				System.out.println("nie istnieje taki bilet");
-
 				return;
 			}
-
 			if(aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(bilet)) {
-				System.out.println("bilet zostal zwrocony");
 				aplikacja.getKasaBiletowa().zwrocBilet(bilet);
 				return;
 			}
 
 		}
+		System.out.println("Podaj tresc twojej wiadomosci");
+		wiadomosc = podajTrescWiadomosci();
 
-
-			System.out.println("Podaj tresc twojej wiadomosci");
-			wiadomosc = podajTrescWiadomosci();
-
+		aplikacja.utworzZgloszenie(email,temat,wiadomosc);
 
 	}
 
@@ -153,12 +178,8 @@ public class InterfejsUzytkownika {
 
 					case 2:
 
-						scanner.nextLine();
-						System.out.println("Podaj nazwe atrakcji");
-						String nazwa = scanner.nextLine();
+						Atrakcja atrakcja = ui.wyszukajAtrakcje(ui.czyZalogowany);
 
-						Atrakcja atrakcja = ui.wyszukajAtrakcje(nazwa, ui.czyZalogowany);
-						
 						ui.wyswietlDaneAtrakcji(atrakcja);
 
 						break;

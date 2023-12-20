@@ -21,7 +21,6 @@ public class KasaBiletowa {
 
 		return true;
 
-
 	}
 
 	public void zwrocBiletPrzezZgloszenie(Zgloszenie zgloszenie) {
@@ -31,13 +30,13 @@ public class KasaBiletowa {
 		return;
 	}
 	public void zwrocBilet(Bilet bilet) {
-
+		listaBiletow.remove(bilet);
 		System.out.println("Zwrocono bilet poprzez zwroc bilet" );
 
 		return;
 	}
 
-	public void kubBilet() {
+	public void kupBilet(Atrakcja atrakcja) {
 		// TODO - implement KasaBiletowa.kubBilet
 		throw new UnsupportedOperationException();
 	}

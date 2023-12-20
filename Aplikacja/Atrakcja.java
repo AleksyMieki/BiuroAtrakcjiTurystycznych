@@ -15,7 +15,6 @@ public class Atrakcja {
 	 * @param czasOtwarcia
 	 * @param lokalizacja
 	 */
-	//TODO uzywac tylko jednego konstruktora
 	public Atrakcja(String nazwa, float cena, String czasOtwarcia, String lokalizacja) {
 		this.nazwa = nazwa;
 		this.cena = cena;
@@ -31,7 +30,7 @@ public class Atrakcja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param nazwa
 	 */
 	public void setNazwa(String nazwa) {
@@ -43,7 +42,7 @@ public class Atrakcja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cena
 	 */
 	public void setCena(float cena) {
@@ -55,7 +54,7 @@ public class Atrakcja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param czasOtwarcia
 	 */
 	public void setCzasOtwarcia(String czasOtwarcia) {
@@ -67,7 +66,7 @@ public class Atrakcja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param lokalizacja
 	 */
 	public void setLokalizacja(String lokalizacja) {
@@ -75,15 +74,19 @@ public class Atrakcja {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param nazwa
 	 * @param cena
 	 * @param czasOtwarcia
 	 * @param lokalizacja
 	 */
+	public Atrakcja(String nazwa, BigDecimal cena, String czasOtwarcia, String lokalizacja) {
+		// TODO - implement Atrakcja.Atrakcja
+		throw new UnsupportedOperationException();
+	}
 
 	/**
-	 * 
+	 *
 	 * @param atrybutyAtrakcji
 	 */
 	public Atrakcja(Dane atrybutyAtrakcji) {
