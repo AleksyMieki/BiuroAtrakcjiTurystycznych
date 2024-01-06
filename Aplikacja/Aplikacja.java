@@ -1,13 +1,12 @@
 package Aplikacja;
 
 import java.util.*;
-import java.util.Scanner;
 
 public class Aplikacja {
 
 	private static Aplikacja instance; // Statyczna instancja
 
-	private Collection<Atrakcja> listaAtrakcji = new ArrayList<>();
+	private ArrayList<Atrakcja> listaAtrakcji = new ArrayList<>();
 	private int indeksAtrakcji;
 	private Atrakcja znalezionaAtrakcja;
 	private Collection<Zgloszenie> listaZgloszen = new ArrayList<>();
@@ -30,6 +29,10 @@ public class Aplikacja {
 
 		Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl",1,"tresc wiadomosci numer 1", "12.12.2023");
 		Zgloszenie zgloszenie2 = new Zgloszenie("kiedy otwarcie", "a@.pl",2,"tresc wiadomosci numer 2", "12.12.2023");
+
+		kasaBiletowa.kupBilet(listaAtrakcji.get(0));
+		kasaBiletowa.kupBilet(listaAtrakcji.get(1));
+		kasaBiletowa.kupBilet(listaAtrakcji.get(2));
 
 		listaZgloszen.add(zgloszenie);
 		listaZgloszen.add(zgloszenie2);
@@ -103,7 +106,7 @@ public class Aplikacja {
 
 		atrakcja.setNazwa(daneDoEdycji.getNazwa());
 		atrakcja.setCena(daneDoEdycji.getCena());
-		atrakcja.setCzasOtwarcia(daneDoEdycji.getCzasOtwarcia());
+		atrakcja.setCzasOtwarcia(daneDoEdycji.getDataAtrakcji());
 		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
 
 	}
@@ -115,7 +118,7 @@ public class Aplikacja {
 	public void utworzAtrakcje(Dane atrybutyAtrakcji) {
 
 		Atrakcja nowaAtrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
-				atrybutyAtrakcji.getCzasOtwarcia(),atrybutyAtrakcji.getLokalizacja());
+				atrybutyAtrakcji.getDataAtrakcji(),atrybutyAtrakcji.getLokalizacja());
 
 		listaAtrakcji.add(nowaAtrakcja);
 

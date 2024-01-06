@@ -8,22 +8,14 @@ public class KasaBiletowa {
 
 	private ArrayList<Bilet> listaBiletow = new ArrayList<>();
 
-	public KasaBiletowa()
-	{
-		Bilet bilet = new Bilet("a@gmail.com",1,"piza","2024-01-06 20:50:20","luwr",124,"10.10.2023");
-		Bilet bilet2 = new Bilet("a@gmail.com",2,"piza","2024-01-07 20:49:10","luwr2",123,"11.10.2023");
-		Bilet bilet3 = new Bilet("a@gmail.com",3,"piza","12.12.2023","luwr3",120,"12.10.2023");
-
-		listaBiletow.add(bilet);
-		listaBiletow.add(bilet2);
-		listaBiletow.add(bilet3);
-
-	}
 	public boolean sprawdzDateWydarzenia(Bilet bilet) {
 
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 		Date dataNaBilecie = null;
+
 		String dateString = data.format(new Date());
+
 		Date teraz = null;
 
 		try {
@@ -50,11 +42,6 @@ public class KasaBiletowa {
 		return false;
 	}
 
-	public void zwrocBilet(Zgloszenie zgloszenie) {
-
-		System.out.println("Zwrocono bilet o temacie " + zgloszenie.getTemat() + "zakupionego przez uzytkownika " + zgloszenie.getEmail() );
-
-	}
 	public void zwrocBilet(Bilet bilet) {
 
 		listaBiletow.remove(bilet);
@@ -64,9 +51,13 @@ public class KasaBiletowa {
 	}
 
 	public void kupBilet(Atrakcja atrakcja) {
+
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = data.format(new Date());
-		listaBiletow.add(new Bilet("a@gmail.com",listaBiletow.size()+1,atrakcja.getNazwa(),atrakcja.getCzasOtwarcia(),atrakcja.getLokalizacja(),atrakcja.getCena(),dateString));
+
+
+
+		listaBiletow.add(new Bilet("a@gmail.com",listaBiletow.size()+1,dateString, atrakcja));
 
 	}
 

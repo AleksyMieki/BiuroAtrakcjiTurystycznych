@@ -4,21 +4,21 @@ public class Dane {
 
 	private String nazwa;
 	private float cena;
-	private String czasOtwarcia;
+	private String dataAtrakcji;
 	private String lokalizacja;
 
 	/**
 	 * 
 	 * @param nazwa
 	 * @param cena
-	 * @param czasOtwarcia
+	 * @param dataAtrakcji
 	 * @param lokalizacja
 	 */
-	public Dane(String nazwa, float cena, String czasOtwarcia, String lokalizacja) {
+	public Dane(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
 		// TODO - implement Dane.Dane
 		this.nazwa = nazwa;
 		this.cena = cena;
-		this.czasOtwarcia = czasOtwarcia;
+		this.dataAtrakcji = dataAtrakcji;
 		this.lokalizacja = lokalizacja;
 	}
 
@@ -30,8 +30,8 @@ public class Dane {
 		return this.cena;
 	}
 
-	public String getCzasOtwarcia() {
-		return this.czasOtwarcia;
+	public String getDataAtrakcji() {
+		return this.dataAtrakcji;
 	}
 
 	public String getLokalizacja() {

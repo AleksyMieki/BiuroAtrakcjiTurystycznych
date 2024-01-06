@@ -6,19 +6,19 @@ public class Atrakcja {
 
 	private String nazwa;
 	private float cena;
-	private String czasOtwarcia;
+	private String dataAtrakcji;
 	private String lokalizacja;
 
 	/**
 	 * @param nazwa
 	 * @param cena
-	 * @param czasOtwarcia
+	 * @param dataAtrakcji
 	 * @param lokalizacja
 	 */
-	public Atrakcja(String nazwa, float cena, String czasOtwarcia, String lokalizacja) {
+	public Atrakcja(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
 		this.nazwa = nazwa;
 		this.cena = cena;
-		this.czasOtwarcia = czasOtwarcia;
+		this.dataAtrakcji = dataAtrakcji;
 		this.lokalizacja = lokalizacja;
 	}
 
@@ -47,8 +47,8 @@ public class Atrakcja {
 		this.cena = cena;
 	}
 
-	public String getCzasOtwarcia() {
-		return this.czasOtwarcia;
+	public String getDataAtrakcji() {
+		return this.dataAtrakcji;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Atrakcja {
 	 * @param czasOtwarcia
 	 */
 	public void setCzasOtwarcia(String czasOtwarcia) {
-		this.czasOtwarcia = czasOtwarcia;
+		this.dataAtrakcji = czasOtwarcia;
 	}
 
 	public String getLokalizacja() {
@@ -88,10 +88,12 @@ public class Atrakcja {
 	 * @param atrybutyAtrakcji
 	 */
 	public Atrakcja(Dane atrybutyAtrakcji) {
+
 		this.nazwa = atrybutyAtrakcji.getNazwa();
 		this.cena = atrybutyAtrakcji.getCena();
-		this.czasOtwarcia = atrybutyAtrakcji.getCzasOtwarcia();
+		this.dataAtrakcji = atrybutyAtrakcji.getDataAtrakcji();
 		this.lokalizacja = atrybutyAtrakcji.getLokalizacja();
+
 	}
 
 }
