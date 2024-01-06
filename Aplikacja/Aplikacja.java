@@ -53,7 +53,6 @@ public class Aplikacja {
 				.findAny()
 				.orElse(null);
 
-
 		return znalezionaAtrakcja;
 	}
 
@@ -101,10 +100,12 @@ public class Aplikacja {
 	}
 
 	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
+
 		atrakcja.setNazwa(daneDoEdycji.getNazwa());
 		atrakcja.setCena(daneDoEdycji.getCena());
 		atrakcja.setCzasOtwarcia(daneDoEdycji.getCzasOtwarcia());
 		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
+
 	}
 
 	/**
@@ -124,6 +125,7 @@ public class Aplikacja {
 	{
 		return menedzerWiadomosci;
 	}
+
 	public KasaBiletowa getKasaBiletowa()
 	{
 		return kasaBiletowa;

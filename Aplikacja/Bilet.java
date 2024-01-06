@@ -11,7 +11,6 @@ public class Bilet {
 	public Bilet(String email, int numerBiletu, String nazwaAtrakcji, String dataAtrakcji, String lokalizacja, float cenaBiletu, String dataZakupu) {
 		this.email = email;
 		this.numerBiletu = numerBiletu;
-		this.atrakcja.setNazwa(nazwaAtrakcji);
 		this.dataAtrakcji = dataAtrakcji;
 		this.dataZakupu = dataZakupu;
 	}

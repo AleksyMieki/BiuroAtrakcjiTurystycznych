@@ -76,7 +76,7 @@ public class InterfejsUzytkownika {
 
 	private void wyslijZapytanieDoPracownika() {
 
-		Bilet bilet;
+		Bilet znalezionyBilet;
 		String wiadomosc;
 		String email;
 		String temat;
@@ -93,20 +93,26 @@ public class InterfejsUzytkownika {
 		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(temat))
 		{
 			System.out.println("Podaj numer biletu");
-			numerBiletu = podajNumerBiletu();
-			bilet = aplikacja.getKasaBiletowa().wyszukajBilet(numerBiletu);
 
-			if(bilet == null )
+			numerBiletu = podajNumerBiletu();
+
+			znalezionyBilet = aplikacja.getKasaBiletowa().wyszukajBilet(numerBiletu);
+
+			if(znalezionyBilet == null)
 			{
 				System.out.println("nie istnieje taki bilet");
 				return;
 			}
-			if(aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(bilet)) {
-				aplikacja.getKasaBiletowa().zwrocBilet(bilet);
+
+			boolean mniejNizDoba = aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(znalezionyBilet);
+
+			if(mniejNizDoba)
+			{
+				aplikacja.getKasaBiletowa().zwrocBilet(znalezionyBilet);
 				return;
 			}
-
 		}
+
 		System.out.println("Podaj tresc twojej wiadomosci");
 		wiadomosc = podajTrescWiadomosci();
 
@@ -124,7 +130,7 @@ public class InterfejsUzytkownika {
 			System.out.println(atrakcja.getLokalizacja());
 		}
 		else{
-			System.out.println("nie znaleziono atrakcji o podanej nazwie\n");
+			System.out.println("nie znaleziono atrakcji o podanej nazwie");
 		}
 	}
 
@@ -173,7 +179,7 @@ public class InterfejsUzytkownika {
 
 				switch (wybor) {
 					case 1:
-						System.out.println("podaj haslo\n");
+						System.out.println("podaj haslo");
 						ui.zaloguj();
 						break;
 
