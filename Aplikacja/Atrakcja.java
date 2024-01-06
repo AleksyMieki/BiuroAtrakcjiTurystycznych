@@ -23,8 +23,6 @@ public class Atrakcja {
 	}
 
 
-
-
 	public String getNazwa() {
 		return this.nazwa;
 	}

@@ -48,34 +48,23 @@ public class Aplikacja {
 
 	public Atrakcja wyszukajAtrakcje(String nazwa) {
 
-		Atrakcja znalezionaAtrakcja = null;
-		for (Atrakcja atrakcja : listaAtrakcji) {
-			if (atrakcja.getNazwa().equals(nazwa)) {
-				znalezionaAtrakcja = atrakcja;
-				break;
-			}
-		}
+		Atrakcja znalezionaAtrakcja = listaAtrakcji.stream()
+				.filter(atrakcja -> nazwa.equals(atrakcja.getNazwa()))
+				.findAny()
+				.orElse(null);
 
-		if(znalezionaAtrakcja != null) {
-			return znalezionaAtrakcja;
-		}
-		return null;
+
+		return znalezionaAtrakcja;
 	}
 
 	public Zgloszenie getZgloszenieById(int id)
 	{
-		Zgloszenie znalezioneZgloszenie = null;
-		for (Zgloszenie z : listaZgloszen) {
-			if (z.getId() == id) {
-				znalezioneZgloszenie = z;
-				break;
-			}
-		}
+		Zgloszenie znalezioneZgloszenie = listaZgloszen.stream()
+				.filter(zgloszenie -> id == zgloszenie.getId())
+				.findAny()
+				.orElse(null);
 
-		if(znalezioneZgloszenie != null) {
-			return znalezioneZgloszenie;
-		}
-		return null;
+		return znalezioneZgloszenie;
 	}
 	/**
 	 *
@@ -89,7 +78,8 @@ public class Aplikacja {
 
 	public void utworzZgloszenie(String email, String temat, String wiadomosc)
 	{
-		Zgloszenie zgloszenie = new Zgloszenie(email,temat,listaZgloszen.size()+1,wiadomosc,"20.12.2023");
+		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,"20.12.2023");
+
 		listaZgloszen.add(zgloszenie);
 
 		menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
@@ -105,7 +95,9 @@ public class Aplikacja {
 	}
 
 	public void usunAtrakcje(Atrakcja atrakcjaDoUsuniecia) {
+
 		listaAtrakcji.removeIf(atrakcja -> atrakcja.getNazwa().equals(atrakcjaDoUsuniecia.getNazwa()));
+
 	}
 
 	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
@@ -123,9 +115,9 @@ public class Aplikacja {
 
 		Atrakcja nowaAtrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
 				atrybutyAtrakcji.getCzasOtwarcia(),atrybutyAtrakcji.getLokalizacja());
+
 		listaAtrakcji.add(nowaAtrakcja);
 
-		return;
 	}
 
 	public MenedzerWiadomosci getMenedzerWiadomosci()

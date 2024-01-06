@@ -15,6 +15,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	 * @param czyZalogowany
 	 */
 	public void zarzadzajAtrakcja(boolean czyZalogowany) {
+
 		Atrakcja atrakcja;
 		Dane atrybutyAtrakcji;
 
@@ -29,27 +30,40 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 				atrybutyAtrakcji = podajDaneAtrakcji();
 
 			}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
+
 			System.out.println("wprowadzono poprawne dane, tworze atrakcje");
+
 			aplikacja.utworzAtrakcje(atrybutyAtrakcji);
 			System.out.println("Atrakcje utwozono pomyslnie");
+
 		}
 		else
 		{
 			System.out.println("w bazie znaleziono taka atrakcje, czy chcesz ja teraz : \n1.usunac\n2.edytowac");
-			switch (wybierzEdycjeLubUsuniecie())
+
+			int edycjaLubUsuniecie = wybierzEdycjeLubUsuniecie();
+
+			switch (edycjaLubUsuniecie)
 			{
 				case 1:
-					if(potwierdzUsuniecie())
+					boolean potwierdzenie = potwierdzUsuniecie();
+
+					if(potwierdzenie)
 					{
 						aplikacja.usunAtrakcje(atrakcja);
 					}
 					break;
+
 				case 2:
+
 					do {
 						atrybutyAtrakcji = podajDaneAtrakcji();
 					}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
+
 					aplikacja.edytujAtrakcje(atrakcja, atrybutyAtrakcji);
+
 					System.out.println("Pomyslnie zmodyfikowano dane atrakcji");
+
 					break;
 			}
 		}
@@ -101,23 +115,32 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		if(!czyOdpowiedziecNaZgloszenie(zgloszenie)) return;
 
-		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat()))
+		boolean tematIsZwrot = aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat());
+
+		if(tematIsZwrot)
 		{
-			if(czyZwrocicBilet(zgloszenie))
+			boolean czyZwrot = czyZwrocicBilet(zgloszenie);
+
+			if(czyZwrot)
 			{
-				aplikacja.getKasaBiletowa().zwrocBiletPrzezZgloszenie(zgloszenie);
+				aplikacja.getKasaBiletowa().zwrocBilet(zgloszenie);
 			}
+
 		}
 		else
 		{
 
 			System.out.println("Podaj wiadomosc do wyslania");
+
 			String wiadomosc = podajWiadomosc();
+
 			aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 
 		}
 
 	}
+
+
 	private int podajIdZapytania()
 	{
 		Scanner scanner = new Scanner(System.in);

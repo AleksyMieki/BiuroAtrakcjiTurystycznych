@@ -23,7 +23,7 @@ public class KasaBiletowa {
 
 	}
 
-	public void zwrocBiletPrzezZgloszenie(Zgloszenie zgloszenie) {
+	public void zwrocBilet(Zgloszenie zgloszenie) {
 
 		System.out.println("Zwrocono bilet o temacie " + zgloszenie.getTemat() + "zakupionego przez uzytkownika " + zgloszenie.getEmail() );
 
@@ -31,6 +31,7 @@ public class KasaBiletowa {
 	}
 	public void zwrocBilet(Bilet bilet) {
 		listaBiletow.remove(bilet);
+
 		System.out.println("Zwrocono bilet poprzez zwroc bilet" );
 
 		return;
@@ -43,16 +44,12 @@ public class KasaBiletowa {
 
 	public Bilet wyszukajBilet(int id) {
 
-		Bilet znalezionyBilet = null;
-		for (Bilet bilet : listaBiletow) {
-			if (bilet.getNumerBiletu() == id) {
-				znalezionyBilet = bilet;
-				break;
-			}
-		}
+		Bilet znalezionyBilet = listaBiletow.stream()
+				.filter(bilet -> id == bilet.getNumerBiletu())
+				.findAny()
+				.orElse(null);
 
-		if(znalezionyBilet != null) return znalezionyBilet;
-		return null;
+		return znalezionyBilet;
 	}
 
 }

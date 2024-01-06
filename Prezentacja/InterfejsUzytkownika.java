@@ -75,11 +75,13 @@ public class InterfejsUzytkownika {
 	}
 
 	private void wyslijZapytanieDoPracownika() {
+
 		Bilet bilet;
 		String wiadomosc;
 		String email;
 		String temat;
 		int numerBiletu;
+
 		do {
 			System.out.println("Podaj swojego maila");
 			email = podajMaila();
@@ -108,7 +110,7 @@ public class InterfejsUzytkownika {
 		System.out.println("Podaj tresc twojej wiadomosci");
 		wiadomosc = podajTrescWiadomosci();
 
-		aplikacja.utworzZgloszenie(email,temat,wiadomosc);
+		aplikacja.utworzZgloszenie(temat,email,wiadomosc);
 
 	}
 
@@ -171,15 +173,12 @@ public class InterfejsUzytkownika {
 
 				switch (wybor) {
 					case 1:
-
 						System.out.println("podaj haslo\n");
 						ui.zaloguj();
 						break;
 
 					case 2:
-
 						Atrakcja atrakcja = ui.wyszukajAtrakcje(ui.czyZalogowany);
-
 						ui.wyswietlDaneAtrakcji(atrakcja);
 
 						break;
