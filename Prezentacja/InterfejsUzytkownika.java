@@ -2,7 +2,6 @@ package Prezentacja;
 
 import Aplikacja.*;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class InterfejsUzytkownika {
@@ -126,7 +125,7 @@ public class InterfejsUzytkownika {
 			System.out.println("OTO DANE ATRAKCJI");
 			System.out.println(atrakcja.getNazwa());
 			System.out.println(atrakcja.getCena());
-			System.out.println(atrakcja.getCzasOtwarcia());
+			System.out.println(atrakcja.getDataAtrakcji());
 			System.out.println(atrakcja.getLokalizacja());
 		}
 		else{

@@ -2,6 +2,7 @@ package Prezentacja;
 
 
 import Aplikacja.Atrakcja;
+import Aplikacja.Bilet;
 import Aplikacja.Dane;
 import Aplikacja.Zgloszenie;
 
@@ -123,7 +124,11 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 			if(czyZwrot)
 			{
-				aplikacja.getKasaBiletowa().zwrocBilet(zgloszenie);
+				//zapytac uzytkownika o id biletu ze sgloszenia, wyszukac bilet i zwrocic go
+
+				Bilet biletDoZwrotu = aplikacja.getKasaBiletowa().wyszukajBilet(1);
+
+				aplikacja.getKasaBiletowa().zwrocBilet(biletDoZwrotu);
 			}
 
 		}
