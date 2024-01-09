@@ -82,23 +82,31 @@ public class InterfejsUzytkownika {
 		String wiadomosc;
 		String email;
 		String temat;
-		int numerBiletu;
+		int id;
+		boolean poprawny;
+		boolean czyZwrot;
+		boolean mniejNizDoba;
 
 		do {
+
 			System.out.println("Podaj swojego maila");
 			email = podajMaila();
-		}while(!aplikacja.menedzerWiadomosci.sprawdzenieMaila(email));
+			poprawny = aplikacja.menedzerWiadomosci.sprawdzenieMaila(email);
+
+		}while(poprawny == false);
 
 		System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
-		temat = podajTemat();
 
-		if(aplikacja.menedzerWiadomosci.sprawdzenieTematu(temat))
+		temat = podajTemat();
+		czyZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(temat);
+
+		if(czyZwrot)
 		{
 			System.out.println("Podaj numer biletu");
 
-			numerBiletu = podajNumerBiletu();
+			id = podajNumerBiletu();
 
-			znalezionyBilet = aplikacja.kasaBiletowa.wyszukajBilet(numerBiletu);
+			znalezionyBilet = aplikacja.kasaBiletowa.wyszukajBilet(id);
 
 			if(znalezionyBilet == null)
 			{
@@ -106,9 +114,9 @@ public class InterfejsUzytkownika {
 				return;
 			}
 
-			boolean mniejNizDoba = aplikacja.kasaBiletowa.sprawdzDateWydarzenia(znalezionyBilet);
+			mniejNizDoba = aplikacja.kasaBiletowa.sprawdzDateWydarzenia(znalezionyBilet);
 
-			if(mniejNizDoba)
+			if(mniejNizDoba == true)
 			{
 				aplikacja.kasaBiletowa.zwrocBilet(znalezionyBilet);
 				return;

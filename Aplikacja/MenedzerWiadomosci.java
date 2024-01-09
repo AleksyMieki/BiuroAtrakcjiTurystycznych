@@ -15,7 +15,10 @@ public class MenedzerWiadomosci {
 	}
 
 	public boolean sprawdzenieMaila(String mail) {
-		return true;
+
+		if(mail.contains("@")) return true;
+
+		return false;
 	}
 
 	public boolean sprawdzenieTematu(String temat) {
