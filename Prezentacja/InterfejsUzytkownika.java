@@ -53,25 +53,27 @@ public class InterfejsUzytkownika {
 		System.out.println("Podaj nazwę szukanej atrakcji:");
 
 		String nazwa = podajNazwe();
+		boolean wynik = false;
+		Atrakcja znalezionaAtrakcja = aplikacja.wyszukajAtrakcje(nazwa);
 
-		Atrakcja atrakcja = aplikacja.wyszukajAtrakcje(nazwa);
-
-		if(atrakcja == null){
+		if(znalezionaAtrakcja == null){
 			return null;
 		}
 
 		if(czyZalogowany)
 		{
 			System.out.println("atrakcja znaleziona dla pracownika");
-			return atrakcja;
+			return znalezionaAtrakcja;
 		}
 
-		if(czyKupicBilet())
+		wynik = czyKupicBilet();
+
+		if(wynik == true)
 		{
-			aplikacja.getKasaBiletowa().kupBilet(atrakcja);
+			aplikacja.kasaBiletowa.kupBilet(znalezionaAtrakcja);
 		}
 
-		return atrakcja;
+		return znalezionaAtrakcja;
 	}
 
 	private void wyslijZapytanieDoPracownika() {
@@ -85,18 +87,18 @@ public class InterfejsUzytkownika {
 		do {
 			System.out.println("Podaj swojego maila");
 			email = podajMaila();
-		}while(!aplikacja.getMenedzerWiadomosci().sprawdzenieMaila(email));
+		}while(!aplikacja.menedzerWiadomosci.sprawdzenieMaila(email));
 
 		System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
 		temat = podajTemat();
 
-		if(aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(temat))
+		if(aplikacja.menedzerWiadomosci.sprawdzenieTematu(temat))
 		{
 			System.out.println("Podaj numer biletu");
 
 			numerBiletu = podajNumerBiletu();
 
-			znalezionyBilet = aplikacja.getKasaBiletowa().wyszukajBilet(numerBiletu);
+			znalezionyBilet = aplikacja.kasaBiletowa.wyszukajBilet(numerBiletu);
 
 			if(znalezionyBilet == null)
 			{
@@ -104,11 +106,11 @@ public class InterfejsUzytkownika {
 				return;
 			}
 
-			boolean mniejNizDoba = aplikacja.getKasaBiletowa().sprawdzDateWydarzenia(znalezionyBilet);
+			boolean mniejNizDoba = aplikacja.kasaBiletowa.sprawdzDateWydarzenia(znalezionyBilet);
 
 			if(mniejNizDoba)
 			{
-				aplikacja.getKasaBiletowa().zwrocBilet(znalezionyBilet);
+				aplikacja.kasaBiletowa.zwrocBilet(znalezionyBilet);
 				return;
 			}
 		}

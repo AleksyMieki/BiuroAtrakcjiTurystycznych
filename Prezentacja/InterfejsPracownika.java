@@ -125,7 +125,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		if(!czyOdpowiedziecNaZgloszenie(zgloszenie)) return;
 
-		boolean tematIsZwrot = aplikacja.getMenedzerWiadomosci().sprawdzenieTematu(zgloszenie.getTemat());
+		boolean tematIsZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(zgloszenie.getTemat());
 
 		if(tematIsZwrot)
 		{
@@ -135,9 +135,9 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			{
 				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
 
-				Bilet biletDoZwrotu = aplikacja.getKasaBiletowa().wyszukajBilet(1);
+				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(1);
 
-				aplikacja.getKasaBiletowa().zwrocBilet(biletDoZwrotu);
+				aplikacja.kasaBiletowa.zwrocBilet(biletDoZwrotu);
 			}
 
 		}
@@ -146,7 +146,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 			System.out.println("Podaj wiadomosc do wyslania");
 			String wiadomosc = podajWiadomosc();
-			aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
+			aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 
 		}
 

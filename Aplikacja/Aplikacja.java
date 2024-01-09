@@ -10,8 +10,8 @@ public class Aplikacja {
 	private int indeksAtrakcji;
 	private Atrakcja znalezionaAtrakcja;
 	private Collection<Zgloszenie> listaZgloszen = new ArrayList<>();
-	private KasaBiletowa kasaBiletowa = new KasaBiletowa();
-	private MenedzerWiadomosci menedzerWiadomosci = new MenedzerWiadomosci();
+	public KasaBiletowa kasaBiletowa = new KasaBiletowa();
+	public MenedzerWiadomosci menedzerWiadomosci = new MenedzerWiadomosci();
 	private Atrakcja atrakcja;
 
 	public static Aplikacja getInstance() {
@@ -125,13 +125,4 @@ public class Aplikacja {
 
 	}
 
-	public MenedzerWiadomosci getMenedzerWiadomosci()
-	{
-		return menedzerWiadomosci;
-	}
-
-	public KasaBiletowa getKasaBiletowa()
-	{
-		return kasaBiletowa;
-	}
 }
