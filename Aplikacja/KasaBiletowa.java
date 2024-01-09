@@ -40,9 +40,9 @@ public class KasaBiletowa {
 		return false;
 	}
 
-	public void zwrocBilet(Bilet bilet) {
+	public void zwrocBilet(Bilet biletDoZwrotu) {
 
-		listaBiletow.remove(bilet);
+		listaBiletow.remove(biletDoZwrotu);
 
 		System.out.println("Zwrocono bilet poprzez zwroc bilet" );
 
@@ -59,12 +59,12 @@ public class KasaBiletowa {
 
 	public Bilet wyszukajBilet(int id) {
 
-		Bilet znalezionyBilet = listaBiletow.stream()
+		Bilet biletDoZwrotu = listaBiletow.stream()
 				.filter(bilet -> id == bilet.getNumerBiletu())
 				.findAny()
 				.orElse(null);
 
-		return znalezionyBilet;
+		return biletDoZwrotu;
 	}
 
 }

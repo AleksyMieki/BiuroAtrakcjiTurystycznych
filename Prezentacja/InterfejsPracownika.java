@@ -116,6 +116,8 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		Zgloszenie zgloszenie;
 		int idZgloszenia = 0;
+		boolean czyOdpowiedziec = false;
+		boolean tematIsZwrot = false;
 
 		idZgloszenia = podajIdZapytania();
 
@@ -123,9 +125,12 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		if (zgloszenie == null) return;
 
-		if(!czyOdpowiedziecNaZgloszenie(zgloszenie)) return;
+		czyOdpowiedziec = czyOdpowiedziecNaZgloszenie(zgloszenie);
 
-		boolean tematIsZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(zgloszenie.getTemat());
+		if(czyOdpowiedziec == false) return;
+
+
+		tematIsZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(zgloszenie.getTemat());
 
 		if(tematIsZwrot)
 		{
@@ -134,6 +139,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			if(czyZwrot)
 			{
 				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
+				int id = podajIdBiletu();
 
 				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(1);
 
@@ -149,6 +155,16 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 			aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 
 		}
+
+	}
+
+	private int podajIdBiletu() {
+
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("podaj id szukanego biletu ze zgloszenia : ");
+
+		return scanner.nextInt();
 
 	}
 

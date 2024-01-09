@@ -97,9 +97,9 @@ public class Aplikacja {
 		return this.listaZgloszen;
 	}
 
-	public void usunAtrakcje(Atrakcja atrakcjaDoUsuniecia) {
+	public void usunAtrakcje(Atrakcja atrakcja) {
 
-		listaAtrakcji.removeIf(atrakcja -> atrakcja.getNazwa().equals(atrakcjaDoUsuniecia.getNazwa()));
+		listaAtrakcji.remove(atrakcja);
 
 	}
 
