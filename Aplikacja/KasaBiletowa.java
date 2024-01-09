@@ -26,9 +26,7 @@ public class KasaBiletowa {
 			e.printStackTrace();
 		}
 
-
 		long timeDifference = dataNaBilecie.getTime() - teraz.getTime();
-
 		long roznicaDni = (timeDifference / (1000*60*60*24)) % 365;
 
 		if(roznicaDni > 0)
@@ -54,8 +52,6 @@ public class KasaBiletowa {
 
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = data.format(new Date());
-
-
 
 		listaBiletow.add(new Bilet("a@gmail.com",listaBiletow.size()+1,dateString, atrakcja));
 

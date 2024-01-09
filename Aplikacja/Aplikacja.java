@@ -74,6 +74,7 @@ public class Aplikacja {
 	 */
 	public boolean sprawdzPoprawnosc(Dane dane) {
 
+		if(dane.getLokalizacja() == "luwr") return true;
 
 		return false;
 	}
@@ -117,10 +118,10 @@ public class Aplikacja {
 	 */
 	public void utworzAtrakcje(Dane atrybutyAtrakcji) {
 
-		Atrakcja nowaAtrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
+		Atrakcja atrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
 				atrybutyAtrakcji.getDataAtrakcji(),atrybutyAtrakcji.getLokalizacja());
 
-		listaAtrakcji.add(nowaAtrakcja);
+		listaAtrakcji.add(atrakcja);
 
 	}
 

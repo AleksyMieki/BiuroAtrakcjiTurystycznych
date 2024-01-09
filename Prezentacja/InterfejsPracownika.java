@@ -24,17 +24,21 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		if(atrakcja == null)
 		{
+			boolean wynik = false;
+
 			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji, dodawanie nowej");
 
 			do {
 
 				atrybutyAtrakcji = podajDaneAtrakcji();
+				wynik = aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji);
 
-			}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
+			}while(wynik == false);
 
 			System.out.println("wprowadzono poprawne dane, tworze atrakcje");
 
 			aplikacja.utworzAtrakcje(atrybutyAtrakcji);
+
 			System.out.println("Atrakcje utwozono pomyslnie");
 
 		}
@@ -42,9 +46,9 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		{
 			System.out.println("w bazie znaleziono taka atrakcje, czy chcesz ja teraz : \n1.usunac\n2.edytowac");
 
-			int edycjaLubUsuniecie = wybierzEdycjeLubUsuniecie();
+			int edycjaCzyUsuniecie = wybierzEdycjeLubUsuniecie();
 
-			switch (edycjaLubUsuniecie)
+			switch (edycjaCzyUsuniecie)
 			{
 				case 1:
 					boolean potwierdzenie = potwierdzUsuniecie();
@@ -57,9 +61,14 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 				case 2:
 
+					boolean wynik = false;
+
 					do {
+
 						atrybutyAtrakcji = podajDaneAtrakcji();
-					}while(aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji));
+						wynik = aplikacja.sprawdzPoprawnosc(atrybutyAtrakcji);
+
+					}while(wynik == false);
 
 					aplikacja.edytujAtrakcje(atrakcja, atrybutyAtrakcji);
 
@@ -124,7 +133,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 			if(czyZwrot)
 			{
-				//zapytac uzytkownika o id biletu ze sgloszenia, wyszukac bilet i zwrocic go
+				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
 
 				Bilet biletDoZwrotu = aplikacja.getKasaBiletowa().wyszukajBilet(1);
 
@@ -136,9 +145,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		{
 
 			System.out.println("Podaj wiadomosc do wyslania");
-
 			String wiadomosc = podajWiadomosc();
-
 			aplikacja.getMenedzerWiadomosci().wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 
 		}
