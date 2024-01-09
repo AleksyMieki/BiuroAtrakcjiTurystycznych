@@ -17,12 +17,9 @@ public class Bilet {
 	public int getNumerBiletu() {
 		return this.numerBiletu;
 	}
-
 	public String getDataAtrakcji()
 	{
 		return atrakcja.getDataAtrakcji();
 	}
-
-
 
 }

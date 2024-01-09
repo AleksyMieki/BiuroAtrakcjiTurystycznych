@@ -7,12 +7,9 @@ public class Aplikacja {
 	private static Aplikacja instance; // Statyczna instancja
 
 	private ArrayList<Atrakcja> listaAtrakcji = new ArrayList<>();
-	private int indeksAtrakcji;
-	private Atrakcja znalezionaAtrakcja;
-	private Collection<Zgloszenie> listaZgloszen = new ArrayList<>();
+	private ArrayList<Zgloszenie> listaZgloszen = new ArrayList<>();
 	public KasaBiletowa kasaBiletowa = new KasaBiletowa();
 	public MenedzerWiadomosci menedzerWiadomosci = new MenedzerWiadomosci();
-	private Atrakcja atrakcja;
 
 	public static Aplikacja getInstance() {
 		if (instance == null) {
@@ -40,9 +37,6 @@ public class Aplikacja {
 		listaAtrakcji.add(new Atrakcja(dane2));
 		listaAtrakcji.add(new Atrakcja(dane3));
 	}
-	public Atrakcja getAtrakcja() {
-		return atrakcja;
-	}
 
 	/**
 	 *
@@ -58,16 +52,6 @@ public class Aplikacja {
 
 		return znalezionaAtrakcja;
 	}
-
-	public Zgloszenie getZgloszenieById(int id)
-	{
-		Zgloszenie znalezioneZgloszenie = listaZgloszen.stream()
-				.filter(zgloszenie -> id == zgloszenie.getId())
-				.findAny()
-				.orElse(null);
-
-		return znalezioneZgloszenie;
-	}
 	/**
 	 *
 	 * @param dane
@@ -79,6 +63,34 @@ public class Aplikacja {
 		return false;
 	}
 
+	public ArrayList<Zgloszenie> getListaZgloszen() {
+		return this.listaZgloszen;
+	}
+
+	public void usunAtrakcje(Atrakcja atrakcja) {
+		listaAtrakcji.remove(atrakcja);
+	}
+
+
+	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
+		atrakcja.setNazwa(daneDoEdycji.getNazwa());
+		atrakcja.setCena(daneDoEdycji.getCena());
+		atrakcja.setDataAtrakcji(daneDoEdycji.getDataAtrakcji());
+		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
+	}
+
+	public Zgloszenie getZgloszenieById(int id)
+	{
+		Zgloszenie znalezioneZgloszenie = listaZgloszen.stream()
+				.filter(zgloszenie -> id == zgloszenie.getId())
+				.findAny()
+				.orElse(null);
+
+		return znalezioneZgloszenie;
+	}
+
+
+
 	public void utworzZgloszenie(String email, String temat, String wiadomosc)
 	{
 		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,"20.12.2023");
@@ -89,28 +101,11 @@ public class Aplikacja {
 
 	}
 
-	public Collection<Atrakcja> getListaAtrakcji() {
-		return listaAtrakcji;
-	}
 
-	public Collection<Zgloszenie> getListaZgloszen() {
-		return this.listaZgloszen;
-	}
 
-	public void usunAtrakcje(Atrakcja atrakcja) {
 
-		listaAtrakcji.remove(atrakcja);
 
-	}
 
-	public void edytujAtrakcje(Atrakcja atrakcja, Dane daneDoEdycji) {
-
-		atrakcja.setNazwa(daneDoEdycji.getNazwa());
-		atrakcja.setCena(daneDoEdycji.getCena());
-		atrakcja.setCzasOtwarcia(daneDoEdycji.getDataAtrakcji());
-		atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
-
-	}
 
 	/**
 	 *

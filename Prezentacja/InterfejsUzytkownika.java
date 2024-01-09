@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public class InterfejsUzytkownika {
 
-	private Dane dane;
 	private boolean czyZalogowany = false;
-	Aplikacja aplikacja = Aplikacja.getInstance();
+	protected Aplikacja aplikacja = Aplikacja.getInstance();
 
 	private void zaloguj() {
 
@@ -20,34 +19,6 @@ public class InterfejsUzytkownika {
 		if (haslo.equals("1234")) czyZalogowany = true;
 
 	}
-
-	private String podajNazwe() {
-		Scanner scanner = new Scanner(System.in);
-		return scanner.nextLine();
-	}
-
-	private boolean czyKupicBilet() {
-
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("""
-						Czy kupić bilet?
-						1. tak
-						aby nie kupować biletu, wprowadź dowolny znak
-						""");
-
-		String wybor = scanner.nextLine();
-
-		switch (wybor) {
-			case "1": {
-				return true;
-			}
-			default: {
-				return false;
-			}
-		}
-	}
-
 	protected Atrakcja wyszukajAtrakcje(boolean czyZalogowany) {
 
 		System.out.println("Podaj nazwę szukanej atrakcji:");
@@ -74,6 +45,20 @@ public class InterfejsUzytkownika {
 		}
 
 		return znalezionaAtrakcja;
+	}
+
+	private void wyswietlDaneAtrakcji(Atrakcja atrakcja)
+	{
+		if(atrakcja != null) {
+			System.out.println("OTO DANE ATRAKCJI");
+			System.out.println(atrakcja.getNazwa());
+			System.out.println(atrakcja.getCena());
+			System.out.println(atrakcja.getDataAtrakcji());
+			System.out.println(atrakcja.getLokalizacja());
+		}
+		else{
+			System.out.println("nie znaleziono atrakcji o podanej nazwie");
+		}
 	}
 
 	private void wyslijZapytanieDoPracownika() {
@@ -130,20 +115,6 @@ public class InterfejsUzytkownika {
 
 	}
 
-	private void wyswietlDaneAtrakcji(Atrakcja atrakcja)
-	{
-		if(atrakcja != null) {
-			System.out.println("OTO DANE ATRAKCJI");
-			System.out.println(atrakcja.getNazwa());
-			System.out.println(atrakcja.getCena());
-			System.out.println(atrakcja.getDataAtrakcji());
-			System.out.println(atrakcja.getLokalizacja());
-		}
-		else{
-			System.out.println("nie znaleziono atrakcji o podanej nazwie");
-		}
-	}
-
 	private String podajMaila() {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
@@ -164,7 +135,32 @@ public class InterfejsUzytkownika {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
+	private String podajNazwe() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
+	}
 
+	private boolean czyKupicBilet() {
+
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("""
+						Czy kupić bilet?
+						1. tak
+						aby nie kupować biletu, wprowadź dowolny znak
+						""");
+
+		String wybor = scanner.nextLine();
+
+		switch (wybor) {
+			case "1": {
+				return true;
+			}
+			default: {
+				return false;
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 

@@ -24,7 +24,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 		if(atrakcja == null)
 		{
-			boolean wynik = false;
+			boolean wynik;
 
 			System.out.println("nie znaleziono atrakcji o podanej nazwie w bazie atrakcji, dodawanie nowej");
 
@@ -79,11 +79,56 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		}
 	}
 
-	public void przegladajZgloszenia() {
+	public void zarzadzajZapytaniamiKlientow() {
 
-		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
-		wyswietlZapytania(lista);
+		Zgloszenie zgloszenie;
+		int idZgloszenia;
+		boolean czyOdpowiedziec;
+		boolean tematIsZwrot;
 
+		idZgloszenia = podajIdZgloszenia();
+
+		zgloszenie = aplikacja.getZgloszenieById(idZgloszenia);
+
+		if (zgloszenie == null) return;
+
+		czyOdpowiedziec = czyOdpowiedziecNaZgloszenie(zgloszenie);
+
+		if(czyOdpowiedziec == false) return;
+
+		tematIsZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(zgloszenie.getTemat());
+
+		if(tematIsZwrot)
+		{
+			boolean czyZwrot = czyZwrocicBilet(zgloszenie);
+
+			if(czyZwrot)
+			{
+				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
+				int id = podajIdBiletu();
+
+				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(1);
+
+				aplikacja.kasaBiletowa.zwrocBilet(biletDoZwrotu);
+			}
+
+		}
+		else
+		{
+			System.out.println("Podaj wiadomosc do wyslania");
+			String wiadomosc = podajWiadomosc();
+			aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
+		}
+	}
+
+	private int wybierzEdycjeLubUsuniecie() {
+
+		Scanner scanner = new Scanner(System.in);
+
+		int wybor = scanner.nextInt();
+		scanner.nextLine();
+
+		return wybor;
 	}
 
 	private Dane podajDaneAtrakcji() {
@@ -111,124 +156,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return new Dane(nazwa,cena,godzina,lokalizacja);
 
 	}
-
-	public void zarzadzajZapytaniamiKlientow() {
-
-		Zgloszenie zgloszenie;
-		int idZgloszenia = 0;
-		boolean czyOdpowiedziec = false;
-		boolean tematIsZwrot = false;
-
-		idZgloszenia = podajIdZapytania();
-
-		zgloszenie = aplikacja.getZgloszenieById(idZgloszenia);
-
-		if (zgloszenie == null) return;
-
-		czyOdpowiedziec = czyOdpowiedziecNaZgloszenie(zgloszenie);
-
-		if(czyOdpowiedziec == false) return;
-
-
-		tematIsZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(zgloszenie.getTemat());
-
-		if(tematIsZwrot)
-		{
-			boolean czyZwrot = czyZwrocicBilet(zgloszenie);
-
-			if(czyZwrot)
-			{
-				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
-				int id = podajIdBiletu();
-
-				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(1);
-
-				aplikacja.kasaBiletowa.zwrocBilet(biletDoZwrotu);
-			}
-
-		}
-		else
-		{
-
-			System.out.println("Podaj wiadomosc do wyslania");
-			String wiadomosc = podajWiadomosc();
-			aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
-
-		}
-
-	}
-
-	private int podajIdBiletu() {
-
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("podaj id szukanego biletu ze zgloszenia : ");
-
-		return scanner.nextInt();
-
-	}
-
-
-	private int podajIdZapytania()
-	{
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("podaj id szukanego zapytania : ");
-
-		return scanner.nextInt();
-
-	}
-
-	private int wybierzEdycjeLubUsuniecie() {
-
-		Scanner scanner = new Scanner(System.in);
-
-		int wybor = scanner.nextInt();
-		scanner.nextLine();
-
-		return wybor;
-	}
-	private boolean potwierdzUsuniecie()
-	{
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("czy na pewno chcesz usunac ta atrakcje z bazy dostepnych atrakcji(tak/nie)");
-		String potwierdzenie;
-		potwierdzenie = scanner.nextLine();
-
-		if(potwierdzenie.equals("tak")) return true;
-		else if (potwierdzenie.equals("nie")) return false;
-
-		return false;
-	}
-
-	private void wyswietlZapytania(Collection<Zgloszenie> lista)
-	{
-		for (var v : lista) {
-			System.out.println(v.getTrescWiadomosci());
-			System.out.println(v.getId());
-			System.out.println(v.getTemat());
-			System.out.println();
-		}
-	}
-	private boolean czyZwrocicBilet(Zgloszenie zgloszenie)
-	{
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Czy zwrocic bilet?(tak/nie)");
-		String potwierdzenie;
-
-		System.out.println(zgloszenie.getTemat());
-		System.out.println(zgloszenie.getEmail());
-		System.out.println(zgloszenie.getTrescWiadomosci());
-		System.out.println(zgloszenie.getDataWyslania());
-
-		potwierdzenie = scanner.nextLine();
-
-		if(potwierdzenie.equals("tak")) return true;
-		if(potwierdzenie.equals("nie")) return false;
-
-		return false;
-
-	}
 	private boolean czyOdpowiedziecNaZgloszenie(Zgloszenie zgloszenie)
 	{
 		Scanner scanner = new Scanner(System.in);
@@ -248,12 +175,92 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	}
 
-	private String podajWiadomosc()
+	private boolean czyZwrocicBilet(Zgloszenie zgloszenie)
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Czy zwrocic bilet?(tak/nie)");
+		String potwierdzenie;
+
+		System.out.println(zgloszenie.getTemat());
+		System.out.println(zgloszenie.getEmail());
+		System.out.println(zgloszenie.getTrescWiadomosci());
+		System.out.println(zgloszenie.getDataWyslania());
+
+		potwierdzenie = scanner.nextLine();
+
+		if(potwierdzenie.equals("tak")) return true;
+		if(potwierdzenie.equals("nie")) return false;
+
+		return false;
+
+	}
+
+	private int podajIdZgloszenia()
 	{
 		Scanner scanner = new Scanner(System.in);
 
+		System.out.println("podaj id szukanego zapytania : ");
 
+		return scanner.nextInt();
+
+	}
+
+	private String podajWiadomosc()
+	{
+		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
+
+	private boolean potwierdzUsuniecie()
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("czy na pewno chcesz usunac ta atrakcje z bazy dostepnych atrakcji(tak/nie)");
+		String potwierdzenie;
+		potwierdzenie = scanner.nextLine();
+
+		if(potwierdzenie.equals("tak")) return true;
+		else if (potwierdzenie.equals("nie")) return false;
+
+		return false;
+	}
+
+	public void przegladajZgloszenia() {
+
+		Collection<Zgloszenie> lista = aplikacja.getListaZgloszen();
+		wyswietlZapytania(lista);
+
+	}
+
+
+	private void wyswietlZapytania(Collection<Zgloszenie> lista)
+	{
+		for (var v : lista) {
+			System.out.println(v.getTrescWiadomosci());
+			System.out.println(v.getId());
+			System.out.println(v.getTemat());
+			System.out.println();
+		}
+	}
+
+
+
+	private int podajIdBiletu() {
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("podaj id szukanego biletu ze zgloszenia : ");
+		return scanner.nextInt();
+
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 }

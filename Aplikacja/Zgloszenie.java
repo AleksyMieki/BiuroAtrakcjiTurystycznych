@@ -16,17 +16,8 @@ public class Zgloszenie {
 		this.dataWyslania = dataWyslania;
 	}
 
-
 	public String getDataWyslania() {
 		return this.dataWyslania;
-	}
-
-	/**
-	 * 
-	 * @param dataWyslania
-	 */
-	public void setDataWyslania(String dataWyslania) {
-		this.dataWyslania = dataWyslania;
 	}
 
 	public String getTemat() {

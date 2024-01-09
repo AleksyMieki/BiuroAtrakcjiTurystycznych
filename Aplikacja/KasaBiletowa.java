@@ -11,11 +11,8 @@ public class KasaBiletowa {
 	public boolean sprawdzDateWydarzenia(Bilet bilet) {
 
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
 		Date dataNaBilecie = null;
-
 		String dateString = data.format(new Date());
-
 		Date teraz = null;
 
 		try {

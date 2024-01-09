@@ -55,7 +55,7 @@ public class Atrakcja {
 	 *
 	 * @param czasOtwarcia
 	 */
-	public void setCzasOtwarcia(String czasOtwarcia) {
+	public void setDataAtrakcji(String czasOtwarcia) {
 		this.dataAtrakcji = czasOtwarcia;
 	}
 
@@ -73,27 +73,13 @@ public class Atrakcja {
 
 	/**
 	 *
-	 * @param nazwa
-	 * @param cena
-	 * @param czasOtwarcia
-	 * @param lokalizacja
-	 */
-	public Atrakcja(String nazwa, BigDecimal cena, String czasOtwarcia, String lokalizacja) {
-		// TODO - implement Atrakcja.Atrakcja
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 *
 	 * @param atrybutyAtrakcji
 	 */
 	public Atrakcja(Dane atrybutyAtrakcji) {
-
 		this.nazwa = atrybutyAtrakcji.getNazwa();
 		this.cena = atrybutyAtrakcji.getCena();
 		this.dataAtrakcji = atrybutyAtrakcji.getDataAtrakcji();
 		this.lokalizacja = atrybutyAtrakcji.getLokalizacja();
-
 	}
 
 }
