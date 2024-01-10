@@ -39,11 +39,6 @@ public class Aplikacja {
 		listaAtrakcji.add(new Atrakcja(dane3));
 	}
 
-	/**
-	 *
-	 * @param nazwa
-	 */
-
 	public Atrakcja wyszukajAtrakcje(String nazwa) {
 
 		Atrakcja znalezionaAtrakcja = listaAtrakcji.stream()
@@ -53,10 +48,7 @@ public class Aplikacja {
 
 		return znalezionaAtrakcja;
 	}
-	/**
-	 *
-	 * @param dane
-	 */
+
 	public boolean sprawdzPoprawnosc(Dane dane) {
 
 		if(dane.getLokalizacja() == "luwr" || dane.getLokalizacja() == "Paryz") return true;
@@ -90,8 +82,6 @@ public class Aplikacja {
 		return znalezioneZgloszenie;
 	}
 
-
-
 	public void utworzZgloszenie(String email, String temat, String wiadomosc)
 	{
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -105,10 +95,6 @@ public class Aplikacja {
 
 	}
 
-	/**
-	 *
-	 * @param atrybutyAtrakcji
-	 */
 	public void utworzAtrakcje(Dane atrybutyAtrakcji) {
 
 		Atrakcja atrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
