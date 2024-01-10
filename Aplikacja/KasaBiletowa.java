@@ -37,9 +37,9 @@ public class KasaBiletowa {
 		return false;
 	}
 
-	public void zwrocBilet(Bilet biletDoZwrotu) {
+	public void zwrocBilet(Bilet znalezionyBilet) {
 
-		listaBiletow.remove(biletDoZwrotu);
+		listaBiletow.remove(znalezionyBilet);
 
 		System.out.println("Zwrocono bilet poprzez zwroc bilet" );
 

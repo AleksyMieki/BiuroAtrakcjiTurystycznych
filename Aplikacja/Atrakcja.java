@@ -22,6 +22,12 @@ public class Atrakcja {
 		this.lokalizacja = lokalizacja;
 	}
 
+	public Atrakcja(Dane atrybutyAtrakcji) {
+		this.nazwa = atrybutyAtrakcji.getNazwa();
+		this.cena = atrybutyAtrakcji.getCena();
+		this.dataAtrakcji = atrybutyAtrakcji.getDataAtrakcji();
+		this.lokalizacja = atrybutyAtrakcji.getLokalizacja();
+	}
 
 	public String getNazwa() {
 		return this.nazwa;
@@ -39,10 +45,6 @@ public class Atrakcja {
 		return this.cena;
 	}
 
-	/**
-	 *
-	 * @param cena
-	 */
 	public void setCena(float cena) {
 		this.cena = cena;
 	}
@@ -51,10 +53,6 @@ public class Atrakcja {
 		return this.dataAtrakcji;
 	}
 
-	/**
-	 *
-	 * @param czasOtwarcia
-	 */
 	public void setDataAtrakcji(String czasOtwarcia) {
 		this.dataAtrakcji = czasOtwarcia;
 	}
@@ -63,23 +61,8 @@ public class Atrakcja {
 		return this.lokalizacja;
 	}
 
-	/**
-	 *
-	 * @param lokalizacja
-	 */
 	public void setLokalizacja(String lokalizacja) {
 		this.lokalizacja = lokalizacja;
 	}
-
-	/**
-	 *
-	 * @param atrybutyAtrakcji
-	 */
-	public Atrakcja(Dane atrybutyAtrakcji) {
-		this.nazwa = atrybutyAtrakcji.getNazwa();
-		this.cena = atrybutyAtrakcji.getCena();
-		this.dataAtrakcji = atrybutyAtrakcji.getDataAtrakcji();
-		this.lokalizacja = atrybutyAtrakcji.getLokalizacja();
-	}
-
+	
 }

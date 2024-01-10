@@ -57,11 +57,12 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 					{
 						aplikacja.usunAtrakcje(atrakcja);
 					}
+
 					break;
 
 				case 2:
 
-					boolean wynik = false;
+					boolean wynik;
 
 					do {
 
@@ -82,6 +83,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 	public void zarzadzajZapytaniamiKlientow() {
 
 		Zgloszenie zgloszenie;
+
 		int idZgloszenia;
 		boolean czyOdpowiedziec;
 		boolean tematIsZwrot;
@@ -102,12 +104,11 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		{
 			boolean czyZwrot = czyZwrocicBilet(zgloszenie);
 
-			if(czyZwrot)
+			if(czyZwrot == true)
 			{
-				//zapytac uzytkownika o id biletu ze zgloszenia, wyszukac bilet i zwrocic go
 				int id = podajIdBiletu();
 
-				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(1);
+				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(id);
 
 				aplikacja.kasaBiletowa.zwrocBilet(biletDoZwrotu);
 			}

@@ -15,7 +15,7 @@ public class Dane {
 	 * @param lokalizacja
 	 */
 	public Dane(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
-		// TODO - implement Dane.Dane
+
 		this.nazwa = nazwa;
 		this.cena = cena;
 		this.dataAtrakcji = dataAtrakcji;

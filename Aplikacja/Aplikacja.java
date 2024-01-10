@@ -59,7 +59,7 @@ public class Aplikacja {
 	 */
 	public boolean sprawdzPoprawnosc(Dane dane) {
 
-		if(dane.getLokalizacja() == "luwr") return true;
+		if(dane.getLokalizacja() == "luwr" || dane.getLokalizacja() == "Paryz") return true;
 
 		return false;
 	}
@@ -95,21 +95,15 @@ public class Aplikacja {
 	public void utworzZgloszenie(String email, String temat, String wiadomosc)
 	{
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = data.format(new Date());
+		String dataWyslania = data.format(new Date());
 
-		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,dateString);
+		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,dataWyslania);
 
 		listaZgloszen.add(zgloszenie);
 
 		menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
 
 	}
-
-
-
-
-
-
 
 	/**
 	 *
