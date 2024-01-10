@@ -1,14 +1,11 @@
 package Prezentacja;
 
 import Aplikacja.*;
-
 import java.util.Scanner;
 
 public class InterfejsUzytkownika {
-
 	private boolean czyZalogowany = false;
 	protected Aplikacja aplikacja = Aplikacja.getInstance();
-
 	private void zaloguj() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -225,13 +222,9 @@ public class InterfejsUzytkownika {
 						break;
 					case 4:
 						ui.czyZalogowany = false;
-
 						break;
-
 				}
 			}
 		}
-
 	}
-
 }

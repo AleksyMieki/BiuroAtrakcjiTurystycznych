@@ -39,7 +39,7 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 			aplikacja.utworzAtrakcje(atrybutyAtrakcji);
 
-			System.out.println("Atrakcje utwozono pomyslnie");
+			System.out.println("Atrakcje utworzono pomyslnie");
 
 		}
 		else
@@ -111,15 +111,12 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 				Bilet biletDoZwrotu = aplikacja.kasaBiletowa.wyszukajBilet(id);
 
 				aplikacja.kasaBiletowa.zwrocBilet(biletDoZwrotu);
+				return;
 			}
-
 		}
-		else
-		{
-			System.out.println("Podaj wiadomosc do wyslania");
-			String wiadomosc = podajWiadomosc();
-			aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
-		}
+		System.out.println("Podaj wiadomosc do wyslania");
+		String wiadomosc = podajWiadomosc();
+		aplikacja.menedzerWiadomosci.wyslijWiadomoscPracownik(zgloszenie,wiadomosc);
 	}
 
 	private int wybierzEdycjeLubUsuniecie() {
@@ -232,7 +229,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 
 	}
 
-
 	private void wyswietlZapytania(Collection<Zgloszenie> lista)
 	{
 		for (var v : lista) {
@@ -243,8 +239,6 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		}
 	}
 
-
-
 	private int podajIdBiletu() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -252,16 +246,4 @@ public class InterfejsPracownika extends InterfejsUzytkownika {
 		return scanner.nextInt();
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 }

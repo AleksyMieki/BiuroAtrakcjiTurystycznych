@@ -5,9 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class KasaBiletowa {
-
 	private ArrayList<Bilet> listaBiletow = new ArrayList<>();
-
 	public boolean sprawdzDateWydarzenia(Bilet bilet) {
 
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -30,38 +28,28 @@ public class KasaBiletowa {
 		{
 			System.out.println(bilet.getDataAtrakcji());
 			System.out.println(dateString);
-
 			return true;
 		}
-
 		return false;
 	}
-
 	public void zwrocBilet(Bilet znalezionyBilet) {
-
 		listaBiletow.remove(znalezionyBilet);
-
 		System.out.println("Zwrocono bilet poprzez zwroc bilet" );
 
 	}
-
 	public void kupBilet(Atrakcja atrakcja) {
 
 		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = data.format(new Date());
-
 		listaBiletow.add(new Bilet("a@gmail.com",listaBiletow.size()+1,dateString, atrakcja));
 
 	}
-
 	public Bilet wyszukajBilet(int id) {
 
 		Bilet biletDoZwrotu = listaBiletow.stream()
 				.filter(bilet -> id == bilet.getNumerBiletu())
 				.findAny()
 				.orElse(null);
-
 		return biletDoZwrotu;
 	}
-
 }
