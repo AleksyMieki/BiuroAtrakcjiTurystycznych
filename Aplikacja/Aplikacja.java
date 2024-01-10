@@ -1,5 +1,6 @@
 package Aplikacja;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Aplikacja {
@@ -93,7 +94,10 @@ public class Aplikacja {
 
 	public void utworzZgloszenie(String email, String temat, String wiadomosc)
 	{
-		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,"20.12.2023");
+		SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = data.format(new Date());
+
+		Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,dateString);
 
 		listaZgloszen.add(zgloszenie);
 

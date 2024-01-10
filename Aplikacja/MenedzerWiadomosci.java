@@ -9,9 +9,9 @@ public class MenedzerWiadomosci {
 		System.out.println("wyslalem wiadomosc " + wiadomosc + " na zgloszenie o tym temacie: " + zgloszenie.getTemat());
 	}
 
-	public void wyslijWiadomosc(Zgloszenie wiadomosc)
+	public void wyslijWiadomosc(Zgloszenie zgloszenie)
 	{
-		System.out.println("wyslano wiadomosc o podanej tresci " + wiadomosc.getTrescWiadomosci());
+		System.out.println("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci());
 	}
 
 	public boolean sprawdzenieMaila(String mail) {
